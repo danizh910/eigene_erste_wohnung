@@ -14,34 +14,29 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { Check, Clock, Smile, TrendingUp } from 'lucide-react';
 
 const criteria = [
   {
-    goal: 'Beschleunigte Kautionseröffnung',
-    criterion: 'Task Completion Time < 10 Min',
-    type: 'Quanti',
-    method: 'Usability-Test-Messung',
-    min: '15 Min',
-    ziel: '10 Min',
-    stretch: '8 Min',
+    kategorie: 'Effizienz',
+    kriterium: 'Task Completion Time',
+    art: 'Quanti',
+    ziel: '< 5 Min',
+    icon: Clock,
   },
   {
-    goal: 'Erhöhtes Nutzervertrauen',
-    criterion: 'Nutzervertrauen in Rechtsicherheit',
-    type: 'Quali',
-    method: 'Post-Task-Befragung (Skala 1-5)',
-    min: '3.5/5',
-    ziel: '4.2/5',
-    stretch: '4.7/5',
+    kategorie: 'Zufriedenheit',
+    kriterium: 'Nutzer-Feedback',
+    art: 'Quali',
+    ziel: '"Einfach & Sicher"',
+    icon: Smile,
   },
   {
-    goal: 'Reduzierte Supportanfragen',
-    criterion: 'Anzahl der Anfragen zur Kautionseröffnung',
-    type: 'Quanti',
-    method: 'Analyse von Support-Tickets',
-    min: '-15%',
-    ziel: '-30%',
-    stretch: '-50%',
+    kategorie: 'Effektivität',
+    kriterium: 'Task Success Rate',
+    art: 'Quanti',
+    ziel: '100%',
+    icon: Check,
   },
 ];
 
@@ -61,29 +56,23 @@ export default function Erfolgskriterien() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Ziel</TableHead>
-                  <TableHead>Erfolgskriterium</TableHead>
+                  <TableHead>Kategorie</TableHead>
+                  <TableHead>Kriterium</TableHead>
                   <TableHead>Art</TableHead>
-                  <TableHead>Messmethode</TableHead>
-                  <TableHead>Min</TableHead>
-                  <TableHead>Ziel</TableHead>
-                  <TableHead>Stretch</TableHead>
+                  <TableHead>Zielwert</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {criteria.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.goal}</TableCell>
-                    <TableCell>{item.criterion}</TableCell>
+                {criteria.map((item) => (
+                  <TableRow key={item.kriterium}>
+                    <TableCell className="font-medium flex items-center gap-2"><item.icon className="size-4 text-primary" /> {item.kategorie}</TableCell>
+                    <TableCell>{item.kriterium}</TableCell>
                     <TableCell>
-                      <Badge variant={item.type === 'Quanti' ? 'default' : 'secondary'} className={item.type === 'Quanti' ? 'bg-primary' : ''}>
-                        {item.type}
+                      <Badge variant={item.art === 'Quanti' ? 'default' : 'secondary'} className={item.art === 'Quanti' ? 'bg-primary text-primary-foreground' : ''}>
+                        {item.art}
                       </Badge>
                     </TableCell>
-                    <TableCell>{item.method}</TableCell>
-                    <TableCell>{item.min}</TableCell>
                     <TableCell className="font-semibold text-primary">{item.ziel}</TableCell>
-                    <TableCell>{item.stretch}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -91,6 +80,44 @@ export default function Erfolgskriterien() {
           </div>
         </CardContent>
       </Card>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="text-primary" />
+              <span>Schwellenwerte</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-around">
+              <div className="text-center">
+                <p className="text-2xl font-bold">70%</p>
+                <p className="text-sm text-muted-foreground">Min</p>
+              </div>
+              <div className="text-center text-primary">
+                <p className="text-2xl font-bold">90%</p>
+                <p className="text-sm font-semibold">Ziel</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold">100%</p>
+                <p className="text-sm text-muted-foreground">Stretch</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Review-Zeitpunkte</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc list-inside text-muted-foreground space-y-2">
+              <li>Ende Tag 2 (Ideen-Check)</li>
+              <li>Ende Tag 4 (Test-Check)</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

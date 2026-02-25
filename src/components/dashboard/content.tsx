@@ -4,16 +4,14 @@ import { useSearchParams } from 'next/navigation';
 import Situationsanalyse from './a1-situationsanalyse';
 import Erfolgskriterien from './b1-erfolgskriterien';
 import Placeholder from './placeholder';
-import SmartGoalGeneratorView from './smart-goal-generator-view';
 
 const sections: { [key: string]: React.ComponentType<{title?: string}> } = {
   a1: Situationsanalyse,
   b1: Erfolgskriterien,
-  tag2: () => <Placeholder title="Tag 2: Ideation & Priorisierung" />,
-  tag3: () => <Placeholder title="Tag 3: Prototyping-Logbuch" />,
-  tag4: () => <Placeholder title="Tag 4: Testergebnisse" />,
-  tag5: () => <Placeholder title="Tag 5: Pitch Deck" />,
-  'smart-goal-generator': SmartGoalGeneratorView,
+  c1: () => <Placeholder title="C1-C3: Ideation" />,
+  d1: () => <Placeholder title="D1-D2: Prototyping" />,
+  e1: () => <Placeholder title="E1-F1: Testing & Bewertung" />,
+  h1: () => <Placeholder title="H1: Pitch" />,
 };
 
 export default function DashboardContent() {

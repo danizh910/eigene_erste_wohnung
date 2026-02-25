@@ -8,7 +8,6 @@ import {
   FlaskConical,
   Presentation,
   CheckCircle,
-  Bot,
   Banknote,
 } from 'lucide-react';
 
@@ -26,11 +25,10 @@ import {
 const menuItems = [
   { id: 'a1', label: 'A1: Situationsanalyse', icon: Home },
   { id: 'b1', label: 'B1: Erfolgskriterien', icon: CheckCircle },
-  { id: 'tag2', label: 'Tag 2: Ideation', icon: FlaskConical },
-  { id: 'tag3', label: 'Tag 3: Prototyping', icon: FileText },
-  { id: 'tag4', label: 'Tag 4: Testing', icon: Target },
-  { id: 'tag5', label: 'Tag 5: Pitch Deck', icon: Presentation },
-  { id: 'smart-goal-generator', label: 'SMART Goal Generator', icon: Bot },
+  { id: 'c1', label: 'C1: Ideation', icon: FlaskConical },
+  { id: 'd1', label: 'D1: Prototyping', icon: FileText },
+  { id: 'e1', label: 'E1: Testing & Bewertung', icon: Target },
+  { id: 'h1', label: 'H1: Pitch', icon: Presentation },
 ];
 
 export function DashboardSidebar() {
