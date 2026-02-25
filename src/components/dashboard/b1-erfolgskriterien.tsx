@@ -13,22 +13,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Check, Clock, Smile, TrendingUp, Zap, Target, HardHat, FileCheck, ThumbsUp, Scale, Building, ListChecks, MessageSquare, Calendar } from 'lucide-react';
+import { Check, Calendar, ListChecks, Target, CheckCircle } from 'lucide-react';
 
-const quantCriteria = [
-  { kpi: 'Task Completion Time', ziel: '< 5 Minuten', zeitpunkt: 'Usability-Test Tag 4', icon: Clock },
-  { kpi: 'Task Success Rate', ziel: '100 %', zeitpunkt: 'Usability-Test Tag 4', icon: Target },
-  { kpi: 'Fehlerquote', ziel: '0 kritische Abbrüche', zeitpunkt: 'Usability-Test Tag 4', icon: HardHat },
-  { kpi: 'Invite-Funktion funktioniert', ziel: '100 % erfolgreich', zeitpunkt: 'Usability-Test Tag 4', icon: Zap },
+const schwellenwerte = [
+  { criterion: 'Task Completion Time', min: '< 12 Min.', ziel: '< 8 Min.', stretch: '< 5 Min.', methode: 'Stoppuhr / Usability Test' },
+  { criterion: 'Task Success Rate', min: '80%', ziel: '95%', stretch: '100%', methode: 'Beobachtung' },
+  { criterion: 'Mitbewohner-Invite', min: 'Funktional', ziel: 'Intuitiv', stretch: '"Begeisternd"', methode: 'Adjektiv-Karten' },
+  { criterion: 'Rechtssicherheit', min: '"Neutral"', ziel: '"Sicher"', stretch: '"UBS-Standard"', methode: 'Post-Test Interview' },
 ];
-
-const qualCriteria = [
-  { kriterium: 'Subjektive Verständlichkeit', ziel: '„Selbsterklärend“', icon: FileCheck },
-  { kriterium: 'Vertrauen in Rechtssicherheit', ziel: 'Hoch', icon: Scale },
-  { kriterium: 'Wahrgenommene Stressreduktion', ziel: 'Spürbar', icon: ThumbsUp },
-  { kriterium: 'Markenwahrnehmung UBS', ziel: 'Kompetent & unterstützend', icon: Building },
-]
 
 const milestones = [
     { zeitpunkt: 'Ende Tag 2', ziel: 'Ideen validiert & priorisiert' },
@@ -51,24 +43,29 @@ export default function Erfolgskriterien() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><TrendingUp className="text-primary" />1. Quantitative Erfolgskriterien</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Target className="text-primary" />1. Schwellenwerte der Erfolgskriterien</CardTitle>
+          <CardDescription>Diese Tabelle definiert, wann wir unsere Ziele als erreicht, übertroffen oder verfehlt betrachten.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>KPI</TableHead>
-                  <TableHead>Zielwert</TableHead>
-                  <TableHead>Messzeitpunkt</TableHead>
+                  <TableHead>Erfolgskriterium</TableHead>
+                  <TableHead>Minimum (Min)</TableHead>
+                  <TableHead className="text-primary/90">Zielwert (Ziel)</TableHead>
+                  <TableHead>Stretch-Ziel</TableHead>
+                  <TableHead>Messmethode</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {quantCriteria.map((item) => (
-                  <TableRow key={item.kpi}>
-                    <TableCell className="font-medium flex items-center gap-2"><item.icon className="size-4 text-muted-foreground" /> {item.kpi}</TableCell>
+                {schwellenwerte.map((item) => (
+                  <TableRow key={item.criterion}>
+                    <TableCell className="font-medium">{item.criterion}</TableCell>
+                    <TableCell>{item.min}</TableCell>
                     <TableCell className="font-semibold text-primary">{item.ziel}</TableCell>
-                    <TableCell>{item.zeitpunkt}</TableCell>
+                    <TableCell>{item.stretch}</TableCell>
+                    <TableCell>{item.methode}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -77,32 +74,10 @@ export default function Erfolgskriterien() {
         </CardContent>
       </Card>
       
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Smile className="text-primary" />2. Qualitative Erfolgskriterien</CardTitle>
-           <CardDescription>
-            Messmethode: Kurzinterview nach Task, 1–5 Skala (Verständlichkeit, Vertrauen, Einfachheit) & offene Feedback-Fragen.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {qualCriteria.map((item) => (
-                    <div key={item.kriterium} className="flex items-start gap-3 rounded-lg border p-4">
-                        <item.icon className="size-5 text-primary mt-1" />
-                        <div>
-                            <p className="font-semibold">{item.kriterium}</p>
-                            <p className="text-sm text-muted-foreground">Ziel: <span className="font-medium text-primary">{`"${item.ziel}"`}</span></p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </CardContent>
-      </Card>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Calendar className="text-primary" />3. Meilensteine & Review-Zeitpunkte</CardTitle>
+                <CardTitle className="flex items-center gap-2"><Calendar className="text-primary" />2. Meilensteine & Review-Zeitpunkte</CardTitle>
             </CardHeader>
             <CardContent>
                 <ul className="space-y-3">
@@ -120,7 +95,7 @@ export default function Erfolgskriterien() {
         </Card>
         <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><ListChecks className="text-primary" />Peer-Review Leitfaden</CardTitle>
+              <CardTitle className="flex items-center gap-2"><ListChecks className="text-primary" />3. Peer-Review Leitfaden</CardTitle>
               <CardDescription>Für die Prüfung von A1 + B1 durch das andere Team.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -135,6 +110,18 @@ export default function Erfolgskriterien() {
             </CardContent>
         </Card>
       </div>
+
+       <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2"><CheckCircle className="text-primary" />Review-Routine</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">
+            Wir prüfen diese Kriterien am Ende jedes Sprint-Tages (Check-out), um sicherzustellen, dass unser Prototyp die Markenwerte Vertrauen, Kompetenz und Nähe erfüllt.
+          </p>
+        </CardContent>
+      </Card>
+
     </div>
   );
 }

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Users, Target, Lightbulb, FileText, BarChart, User, AlertTriangle, Zap, Smile, ShieldCheck, Search, Scale, PenSquare, Wallet, Megaphone, ArrowRight } from 'lucide-react';
+import { Users, Target, Lightbulb, FileText, BarChart, User, AlertTriangle, Zap, Smile, ShieldCheck, Search, Scale, PenSquare, Wallet, Megaphone, ArrowRight, TrendingDown } from 'lucide-react';
 
 const journeyPhases = [
   {
     phase: "1. Awareness",
     emotion: "Vorfreude & Stress",
     icon: Search,
-    color: "text-blue-500",
     details: [
       { label: "Aktion", text: "Intensive Suche auf Immobilienportalen." },
       { label: "Touchpoint", text: "Homegate, ImmoScout24 etc." }
@@ -18,7 +17,6 @@ const journeyPhases = [
     phase: "2. Consideration",
     emotion: "Verwirrung & Unsicherheit",
     icon: Scale,
-    color: "text-yellow-500",
     details: [
       { label: "Aktion", text: "Vergleich von Kautionsdepot (Bank) vs. Kautionsversicherung." },
       { label: "Touchpoint", text: "UBS Website, Comparis, Foren." }
@@ -28,8 +26,8 @@ const journeyPhases = [
     phase: "3. Purchase",
     emotion: "Frustration & Angst",
     icon: PenSquare,
-    color: "text-red-500",
     painPoint: "Physische Unterschriften-Rallye. Der Vermieter droht mit Absage, da die Bestätigung fehlt.",
+    abwanderung: "Der langsame Bankprozess führt oft zur Abwanderung zu schnellen, aber teureren Kautionsversicherungen.",
     details: [
       { label: "Aktion", text: "Eröffnung des Mietkautionskontos für die WG." },
       { label: "Touchpoint", text: "UBS Filiale, Postweg, E-Banking (limitiert)." }
@@ -40,7 +38,6 @@ const journeyPhases = [
     phase: "4. Retention",
     emotion: "Anspannung & Misstrauen",
     icon: Wallet,
-    color: "text-orange-500",
     painPoint: "Intransparenz, wer wem wie viel für Internet, Strom und Serafe schuldet.",
     details: [
       { label: "Aktion", text: "Monatliche Mietzahlungen & Verwaltung der WG-Kasse." },
@@ -52,7 +49,6 @@ const journeyPhases = [
     phase: "5. Advocacy",
     emotion: "Erleichterung oder Ärger",
     icon: Megaphone,
-    color: "text-green-500",
     details: [
       { label: "Aktion", text: "Empfehlung (oder Warnung) an Freunde und Bekannte." },
       { label: "Touchpoint", text: "Mundpropaganda, Social Media." }
@@ -76,7 +72,7 @@ export default function Situationsanalyse() {
         <CardContent className="space-y-6">
           <div>
             <h3 className="font-semibold text-lg mb-2">Kontext</h3>
-            <p className="text-muted-foreground">Der Lebensmoment „Erste eigene Wohnung“ ist für junge Erwachsene emotional bedeutend und finanziell anspruchsvoll. Besonders bei Wohngemeinschaften (WGs) entstehen zusätzliche Koordinations- und Vertrauensfragen.</p>
+            <p className="text-muted-foreground">Der Lebensmoment „Erste eigene Wohnung“ ist für junge Erwachsene emotional bedeutend und finanziell anspruchsvoll. Besonders bei Wohngemeinschaften (WGs) sind die <strong className="text-foreground">Solidarhaftung</strong> und die Koordination der Mietkaution bei <strong className="text-foreground">Mieterwechseln</strong> die grössten emotionalen Schmerzpunkte.</p>
           </div>
           <div>
             <h3 className="font-semibold text-lg mb-2 flex items-center gap-2"><User /> <span>Zielgruppe: Persona Jan (21)</span></h3>
@@ -135,41 +131,56 @@ export default function Situationsanalyse() {
             <ArrowRight className="text-primary" />
             <span>Customer Journey Map</span>
           </CardTitle>
-           <CardDescription>Die kritischsten Phasen sind "Purchase" und "Retention", wo die grössten Pain Points liegen.</CardDescription>
+           <CardDescription>Die kritischsten Phasen sind "Purchase" und "Retention", wo die grössten Pain Points und das höchste Abwanderungsrisiko liegen.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="md:overflow-x-auto md:pb-4">
-            <div className="flex flex-col md:flex-row md:space-x-4 md:w-max">
+            <div className="relative flex flex-col md:flex-row md:space-x-4 md:w-max">
+              {/* Vertical line for mobile */}
+              <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-border md:hidden" />
               {journeyPhases.map((item, index) => (
                 <React.Fragment key={item.phase}>
-                  <Card className={`w-full md:w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
-                    <CardHeader>
-                      <div className="flex items-center gap-2">
-                         <item.icon className={`size-6 ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
-                         <CardTitle>{item.phase}</CardTitle>
-                      </div>
-                      <CardDescription className={`${item.isCritical ? 'text-destructive' : ''}`}>{item.emotion}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-2 text-sm">
-                      {item.details.map(detail => (
-                        <div key={detail.label}>
-                          <p className="font-semibold">{detail.label}</p>
-                          <p className="text-muted-foreground">{detail.text}</p>
-                        </div>
-                      ))}
-                      {item.painPoint && (
-                        <div className="pt-2">
-                          <p className="font-semibold text-destructive flex items-center gap-1"><AlertTriangle className="size-4" /> Pain Point</p>
-                          <p className="text-destructive/90">{item.painPoint}</p>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                   {index < journeyPhases.length - 1 && (
-                    <div className="flex justify-center items-center my-4 md:my-0 md:self-center">
-                      <ArrowRight className="size-8 text-muted-foreground/50 hidden md:block" />
-                      <div className="w-px h-8 bg-border md:hidden"></div>
+                  <div className="relative flex md:block mb-4 md:mb-0">
+                    <div className="w-14 shrink-0 flex justify-center md:hidden">
+                       <div className="z-10 size-7 rounded-full bg-background border-2 border-border flex items-center justify-center">
+                          <item.icon className={`size-4 ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
+                       </div>
                     </div>
+                    <Card className={`w-full md:w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
+                      <CardHeader>
+                        <div className="flex items-center gap-2">
+                           <item.icon className={`size-6 hidden md:block ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
+                           <CardTitle>{item.phase}</CardTitle>
+                        </div>
+                        <CardDescription className={`${item.isCritical ? 'text-destructive/90' : ''}`}>{item.emotion}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        {item.details.map(detail => (
+                          <div key={detail.label}>
+                            <p className="font-semibold">{detail.label}</p>
+                            <p className="text-muted-foreground">{detail.text}</p>
+                          </div>
+                        ))}
+                        {item.painPoint && (
+                          <div className="pt-2">
+                            <p className="font-semibold text-destructive flex items-center gap-1"><AlertTriangle className="size-4" /> Pain Point</p>
+                            <p className="text-destructive/90">{item.painPoint}</p>
+                          </div>
+                        )}
+                        {item.abwanderung && (
+                          <div className="pt-2 mt-2 border-t border-destructive/20">
+                            <p className="font-semibold text-yellow-600 flex items-center gap-1"><TrendingDown className="size-4" /> Abwanderungsrisiko</p>
+                            <p className="text-yellow-600/90">{item.abwanderung}</p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                   {index < journeyPhases.length - 1 && (
+                      <div className="h-8 w-14 shrink-0 md:h-auto md:w-auto md:self-center flex justify-center items-center">
+                        <ArrowRight className="size-8 text-muted-foreground/50 hidden md:block" />
+                      </div>
                   )}
                 </React.Fragment>
               ))}
