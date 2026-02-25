@@ -1,61 +1,51 @@
 import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Users, Target, Lightbulb, FileText, BarChart, User, AlertTriangle, Zap, Smile, ShieldCheck, Search, Scale, PenSquare, Wallet, Megaphone, ArrowRight, TrendingDown } from 'lucide-react';
+import { Users, Target, Lightbulb, FileText, User, AlertTriangle, Zap, Smile, ShieldCheck, TrendingDown, GanttChartSquare } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-const journeyPhases = [
-  {
-    phase: "1. Awareness",
-    emotion: "Vorfreude & Stress",
-    icon: Search,
-    details: [
-      { label: "Aktion", text: "Intensive Suche auf Immobilienportalen." },
-      { label: "Touchpoint", text: "Homegate, ImmoScout24 etc." }
-    ]
-  },
-  {
-    phase: "2. Consideration",
-    emotion: "Verwirrung & Unsicherheit",
-    icon: Scale,
-    details: [
-      { label: "Aktion", text: "Vergleich von Kautionsdepot (Bank) vs. Kautionsversicherung." },
-      { label: "Touchpoint", text: "UBS Website, Comparis, Foren." }
-    ]
-  },
-  {
-    phase: "3. Purchase",
-    emotion: "Frustration & Angst",
-    icon: PenSquare,
-    painPoint: "Physische Unterschriften-Rallye. Der Vermieter droht mit Absage, da die Bestätigung fehlt.",
-    abwanderung: "Der langsame Bankprozess führt oft zur Abwanderung zu schnellen, aber teureren Kautionsversicherungen.",
-    details: [
-      { label: "Aktion", text: "Eröffnung des Mietkautionskontos für die WG." },
-      { label: "Touchpoint", text: "UBS Filiale, Postweg, E-Banking (limitiert)." }
-    ],
-    isCritical: true
-  },
-  {
-    phase: "4. Retention",
-    emotion: "Anspannung & Misstrauen",
-    icon: Wallet,
-    painPoint: "Intransparenz, wer wem wie viel für Internet, Strom und Serafe schuldet.",
-    details: [
-      { label: "Aktion", text: "Monatliche Mietzahlungen & Verwaltung der WG-Kasse." },
-      { label: "Touchpoint", text: "E-Banking, Twint, Excel-Listen." }
-    ],
-    isCritical: true
-  },
-  {
-    phase: "5. Advocacy",
-    emotion: "Erleichterung oder Ärger",
-    icon: Megaphone,
-    details: [
-      { label: "Aktion", text: "Empfehlung (oder Warnung) an Freunde und Bekannte." },
-      { label: "Touchpoint", text: "Mundpropaganda, Social Media." }
-    ]
-  }
+const journeyData = [
+    {
+        phase: "1. Awareness",
+        aktionen: "Erhält Wohnungszusage; liest Mietvertrag.",
+        touchpoints: "E-Mail, Mietvertrag-PDF.",
+        gedanken: "\"Juhu! Aber wie zahlen wir 4'500 CHF Kaution bis Freitag?\".",
+        emotionen: "🎉 Euphorie schlägt um in 😟 Stress.",
+        painPoint: "Liquiditäts-Schock durch hohe Kautionssumme."
+    },
+    {
+        phase: "2. Consideration",
+        aktionen: "Vergleich Bankdepot vs. Kautionsversicherung; WG-Chat-Diskussion.",
+        touchpoints: "Google, UBS Webseite, WhatsApp.",
+        gedanken: "\"Braucht die Bank von jedem Mitbewohner eine Unterschrift?\".",
+        emotionen: "🤔 Nachdenklich, 😕 Verwirrt.",
+        painPoint: "Unklare Informationen für den Spezialfall WG-Kollektiv."
+    },
+    {
+        phase: "3. Purchase",
+        aktionen: "Versucht Online-Eröffnung; muss Termin für physische Unterschriften aller 3 Personen koordinieren.",
+        touchpoints: "UBS Filiale (Schalter), Postversand.",
+        gedanken: "\"Sarah arbeitet, Lukas ist im Militär – wir schaffen den Termin nie!\".",
+        emotionen: "😫 Frustration, 😰 Angst vor Wohnungsverlust.",
+        painPoint: "Medienbruch & Koordination: Physische Unterschriftenpflicht blockiert den Prozess."
+    },
+    {
+        phase: "4. Retention",
+        aktionen: "Kaution hinterlegt; Jan verwaltet laufende Fixkosten (Strom, WLAN) manuell.",
+        touchpoints: "E-Banking App, WG-Küche.",
+        gedanken: "\"Warum muss ich immer jedem wegen Geld hinterherrennen?\"",
+        emotionen: "😐 Neutral bis 😒 Genervt.",
+        painPoint: "Intransparenz bei der Aufteilung laufender WG-Kosten."
+    },
+    {
+        phase: "5. Advocacy",
+        aktionen: "Berichtet Freunden vom Umzug.",
+        touchpoints: "Persönliches Gespräch.",
+        gedanken: "\"Wohnung super, aber der Bankkram war die Hölle.\"",
+        emotionen: "👎 Enttäuscht vom Erlebnis.",
+        painPoint: "Negative Mundpropaganda trotz gutem Bankprodukt."
+    }
 ];
-
 
 export default function Situationsanalyse() {
   return (
@@ -65,28 +55,26 @@ export default function Situationsanalyse() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BarChart className="text-primary" />
+            <GanttChartSquare className="text-primary" />
             <span>1. Ist-Analyse (Situationsanalyse)</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div>
-            <h3 className="font-semibold text-lg mb-2">Kontext</h3>
-            <p className="text-muted-foreground">Der Lebensmoment „Erste eigene Wohnung“ ist für junge Erwachsene emotional bedeutend und finanziell anspruchsvoll. Besonders bei Wohngemeinschaften (WGs) sind die <strong className="text-foreground">Solidarhaftung</strong> und die Koordination der Mietkaution bei <strong className="text-foreground">Mieterwechseln</strong> die grössten emotionalen Schmerzpunkte.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-lg mb-2 flex items-center gap-2"><User /> <span>Zielgruppe: Persona Jan (21)</span></h3>
-             <ul className="list-disc list-inside text-muted-foreground space-y-1">
-              <li>Student, WG-Neuling, zieht erstmals aus dem Elternhaus aus</li>
-              <li>Begrenztes Budget & wenig Erfahrung mit Verträgen & Kaution</li>
-              <li>Will Konflikte mit Mitbewohnern vermeiden</li>
-              <li>Erwartet digitale, einfache Lösungen und von UBS Vertrauen, Kompetenz & Sicherheit</li>
-            </ul>
+            <h3 className="font-semibold text-lg mb-2">Kontext & Persona</h3>
+            <p className="text-muted-foreground mb-4">Der Lebensmoment „Erste eigene Wohnung“ ist für junge Erwachsene emotional bedeutend und finanziell anspruchsvoll. Besonders bei Wohngemeinschaften (WGs) sind die <strong className="text-foreground">Solidarhaftung</strong> und die Koordination der Mietkaution bei <strong className="text-foreground">Mieterwechseln</strong> die grössten emotionalen Schmerzpunkte.</p>
+             <div className="border-l-4 border-primary pl-4 py-2 bg-primary/5">
+                <h4 className="font-semibold flex items-center gap-2"><User className="size-5 text-primary"/>Persona: Jan (21), Student, gründet seine erste 3er-WG.</h4>
+                <ul className="list-disc list-inside text-muted-foreground space-y-1 mt-2">
+                    <li><strong className="text-foreground">Bedürfnis:</strong> Jan braucht einen rechtlich sicheren Weg, die Kaution mit seinen Freunden zu teilen, ohne die gesamte finanzielle Last allein zu tragen.</li>
+                    <li><strong className="text-foreground">Insight:</strong> Er fühlt sich trotz digitalem Zeitalter von den analogen Bankprozessen im Stich gelassen.</li>
+                </ul>
+             </div>
           </div>
         </CardContent>
       </Card>
       
-       <Card>
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Users className="text-primary" /><span>Erweiterte Stakeholder-Map</span></CardTitle>
         </CardHeader>
@@ -124,68 +112,43 @@ export default function Situationsanalyse() {
             </div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <ArrowRight className="text-primary" />
-            <span>Customer Journey Map</span>
+            <GanttChartSquare className="text-primary" />
+            <span>Detaillierte Customer Journey Map</span>
           </CardTitle>
            <CardDescription>Die kritischsten Phasen sind "Purchase" und "Retention", wo die grössten Pain Points und das höchste Abwanderungsrisiko liegen.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="md:overflow-x-auto md:pb-4">
-            <div className="relative flex flex-col md:flex-row md:space-x-4 md:w-max">
-              {/* Vertical line for mobile */}
-              <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-border md:hidden" />
-              {journeyPhases.map((item, index) => (
-                <React.Fragment key={item.phase}>
-                  <div className="relative flex md:block mb-4 md:mb-0">
-                    <div className="w-14 shrink-0 flex justify-center md:hidden">
-                       <div className="z-10 size-7 rounded-full bg-background border-2 border-border flex items-center justify-center">
-                          <item.icon className={`size-4 ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
-                       </div>
-                    </div>
-                    <Card className={`w-full md:w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
-                      <CardHeader>
-                        <div className="flex items-center gap-2">
-                           <item.icon className={`size-6 hidden md:block ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
-                           <CardTitle>{item.phase}</CardTitle>
-                        </div>
-                        <CardDescription className={`${item.isCritical ? 'text-destructive/90' : ''}`}>{item.emotion}</CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-2 text-sm">
-                        {item.details.map(detail => (
-                          <div key={detail.label}>
-                            <p className="font-semibold">{detail.label}</p>
-                            <p className="text-muted-foreground">{detail.text}</p>
-                          </div>
-                        ))}
-                        {item.painPoint && (
-                          <div className="pt-2">
-                            <p className="font-semibold text-destructive flex items-center gap-1"><AlertTriangle className="size-4" /> Pain Point</p>
-                            <p className="text-destructive/90">{item.painPoint}</p>
-                          </div>
-                        )}
-                        {item.abwanderung && (
-                          <div className="pt-2 mt-2 border-t border-destructive/20">
-                            <p className="font-semibold text-yellow-600 flex items-center gap-1"><TrendingDown className="size-4" /> Abwanderungsrisiko</p>
-                            <p className="text-yellow-600/90">{item.abwanderung}</p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </div>
-                  
-                   {index < journeyPhases.length - 1 && (
-                      <div className="h-8 w-14 shrink-0 md:h-auto md:w-auto md:self-center flex justify-center items-center">
-                        <ArrowRight className="size-8 text-muted-foreground/50 hidden md:block" />
-                      </div>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[120px]">Phase</TableHead>
+                  <TableHead>Aktionen</TableHead>
+                  <TableHead>Touchpoints</TableHead>
+                  <TableHead>Gedanken</TableHead>
+                  <TableHead>Emotionen</TableHead>
+                  <TableHead>Pain Point</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {journeyData.map((item) => (
+                  <TableRow key={item.phase} className={item.phase.includes('Purchase') ? 'bg-destructive/5' : ''}>
+                    <TableCell className="font-semibold">{item.phase}</TableCell>
+                    <TableCell>{item.aktionen}</TableCell>
+                    <TableCell>{item.touchpoints}</TableCell>
+                    <TableCell className="italic text-muted-foreground">{item.gedanken}</TableCell>
+                    <TableCell>{item.emotionen}</TableCell>
+                    <TableCell className={`font-medium ${item.phase.includes('Purchase') ? 'text-destructive' : ''}`}>{item.painPoint}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
+           <p className="text-sm text-yellow-600/90 mt-4 flex items-center gap-2"><TrendingDown className="size-4" /> <strong>Abwanderungsrisiko:</strong> Der langsame, physische Prozess in Phase 3 (Purchase) führt oft dazu, dass Kunden zu schnelleren Kautionsversicherungen abwandern.</p>
         </CardContent>
       </Card>
 
@@ -195,51 +158,31 @@ export default function Situationsanalyse() {
             <CardTitle className="flex items-center gap-2"><AlertTriangle className="text-primary" /><span>Problem Statement</span></CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">Junge Erwachsene in WGs erleben langsame, papierbasierte Prozesse bei der Eröffnung von Mietkautionskonten. Die notwendige physische Koordination aller Beteiligten führt zu Verzögerungen, Stress mit Vermietern und finanzieller Unsicherheit.</p>
+            <p className="text-muted-foreground">Junge Erwachsene in WGs erleben langsame, papierlastige Prozesse bei der Eröffnung von Mietkautionskonten, was zu Stress mit Vermietern und finanzieller Unsicherheit führt.</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><FileText className="text-primary" /><span>Point of View (POV)</span></CardTitle>
+            <CardTitle className="flex items-center gap-2"><FileText className="text-primary" /><span>Top HMW-Frage</span></CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">Jan braucht eine Möglichkeit, die WG-Kaution schnell, simultan und rechtssicher digital abzuwickeln, weil die heutige physische und sequentielle Signatur ein grosser Stress- und Konfliktfaktor ist.</p>
+            <p className="text-muted-foreground">"Wie könnten wir die Kautions-Signatur so gestalten, dass alle WG-Bewohner gleichzeitig und ortsunabhängig digital signieren können?".</p>
           </CardContent>
         </Card>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Lightbulb className="text-primary" /><span>2. HMW-Fragen (How Might We)</span></CardTitle>
-          <CardDescription>Abgeleitet direkt aus den Pain Points. Top 3 sind für Diamond 2 priorisiert.</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2"><Badge variant="default" className="mt-1">Top</Badge><span>Wie könnten wir die Kautions-Signatur 100 % digital und simultan ermöglichen?</span></li>
-              <li className="flex items-start gap-2"><Badge variant="default" className="mt-1">Top</Badge><span>Wie könnten wir WG-Finanzen für alle Bewohner transparent und fair abbilden?</span></li>
-              <li className="flex items-start gap-2"><Badge variant="default" className="mt-1">Top</Badge><span>Wie könnten wir das Budget-Setup für Erstmieter automatisieren und vereinfachen?</span></li>
-              <li className="flex items-start gap-2 text-muted-foreground"><Badge variant="secondary" className="mt-1">Prio</Badge><span>Wie könnten wir rechtliche Sicherheit verständlich kommunizieren?</span></li>
-              <li className="flex items-start gap-2 text-muted-foreground"><Badge variant="secondary" className="mt-1">Prio</Badge><span>Wie könnten wir Stress bei der Koordination mehrerer Parteien minimieren?</span></li>
-            </ul>
-        </CardContent>
-      </Card>
       
       <Card>
         <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Target className="text-primary"/><span>3. Zieldefinition (SMART)</span></CardTitle>
+            <CardTitle className="flex items-center gap-2"><Target className="text-primary"/><span>SMART-Ziele</span></CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
             <div>
-                <h4 className="font-semibold flex items-center gap-2"><Zap className="size-4 text-primary" />Ziel 1 – Digitaler WG-Kautionsprozess</h4>
-                <p className="text-muted-foreground pl-6">Entwicklung eines klickbaren Prototyps für digitale WG-Kautionseröffnung, der die Eröffnung in &lt; 10 Minuten ermöglicht und bis Ende Tag 5 fertig ist.</p>
+                <h4 className="font-semibold flex items-center gap-2"><Zap className="size-4 text-primary" />Ziel 1 – Prototyp</h4>
+                <p className="text-muted-foreground pl-6">Klickbarer Prototyp für WG-Kautionseröffnung in &lt; 10 Min. bis Tag 5.</p>
             </div>
             <div>
-                <h4 className="font-semibold flex items-center gap-2"><Smile className="size-4 text-primary" />Ziel 2 – Usability-Test: Mitbewohner-Invite</h4>
-                <p className="text-muted-foreground pl-6">Erreichen einer 100%igen Task Success Rate bei der Kernfunktion «Mitbewohner zur digitalen Mitunterzeichnung einladen» im Usability-Test an Tag 4.</p>
-            </div>
-            <div>
-                <h4 className="font-semibold flex items-center gap-2"><ShieldCheck className="size-4 text-primary" />Ziel 3 – Vertrauen steigern</h4>
-                <p className="text-muted-foreground pl-6">Sicherstellen, dass Nutzer den Prozess als rechtssicher & verständlich wahrnehmen, gemessen durch mindestens 80% positive Rückmeldungen im Test an Tag 4.</p>
+                <h4 className="font-semibold flex items-center gap-2"><Smile className="size-4 text-primary" />Ziel 2 – Usability</h4>
+                <p className="text-muted-foreground pl-6">100% Task Success Rate beim "Mitbewohner-Invite" im Test an Tag 4.</p>
             </div>
         </CardContent>
       </Card>

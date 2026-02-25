@@ -15,11 +15,31 @@ import {
 } from '@/components/ui/table';
 import { Check, Calendar, ListChecks, Target, CheckCircle } from 'lucide-react';
 
-const schwellenwerte = [
-  { criterion: 'Task Completion Time', min: '< 12 Min.', ziel: '< 8 Min.', stretch: '< 5 Min.', methode: 'Stoppuhr / Usability Test' },
-  { criterion: 'Task Success Rate', min: '80%', ziel: '95%', stretch: '100%', methode: 'Beobachtung' },
-  { criterion: 'Mitbewohner-Invite', min: 'Funktional', ziel: 'Intuitiv', stretch: '"Begeisternd"', methode: 'Adjektiv-Karten' },
-  { criterion: 'Rechtssicherheit', min: '"Neutral"', ziel: '"Sicher"', stretch: '"UBS-Standard"', methode: 'Post-Test Interview' },
+const successCriteria = [
+  {
+    category: 'Effizienz (Quanti)',
+    criterion: 'Task Completion Time (Kautionseröffnung)',
+    method: 'Stoppuhr bei Usability Test',
+    threshold: '🟡 Ziel: < 10 Min.'
+  },
+  {
+    category: 'Zufriedenheit (Quali)',
+    criterion: 'Subjektives Vertrauen in die Rechtssicherheit',
+    method: 'Post-Test Interview',
+    threshold: '🟡 "Wirkt wie offizielle UBS-Lösung"'
+  },
+  {
+    category: 'Effektivität (Quanti)',
+    criterion: 'Task Success Rate (Mitbewohner einladen)',
+    method: 'Beobachtung während Test',
+    threshold: '🟢 Stretch: 100%'
+  },
+  {
+    category: 'Klarheit (Quali)',
+    criterion: 'Verständlichkeit der Budget-Visualisierung',
+    method: 'Think Aloud Methode',
+    threshold: '🟡 Keine Verständnisfragen der User'
+  },
 ];
 
 const milestones = [
@@ -43,29 +63,27 @@ export default function Erfolgskriterien() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Target className="text-primary" />1. Schwellenwerte der Erfolgskriterien</CardTitle>
-          <CardDescription>Diese Tabelle definiert, wann wir unsere Ziele als erreicht, übertroffen oder verfehlt betrachten.</CardDescription>
+          <CardTitle className="flex items-center gap-2"><Target className="text-primary" />1. Erfolgstabelle</CardTitle>
+          <CardDescription>Diese Tabelle definiert, wann wir unsere Ziele als erreicht betrachten.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Erfolgskriterium</TableHead>
-                  <TableHead>Minimum (Min)</TableHead>
-                  <TableHead className="text-primary/90">Zielwert (Ziel)</TableHead>
-                  <TableHead>Stretch-Ziel</TableHead>
+                  <TableHead>Kategorie</TableHead>
+                  <TableHead>Kriterium</TableHead>
                   <TableHead>Messmethode</TableHead>
+                  <TableHead>Schwellenwert (Ziel)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {schwellenwerte.map((item) => (
+                {successCriteria.map((item) => (
                   <TableRow key={item.criterion}>
-                    <TableCell className="font-medium">{item.criterion}</TableCell>
-                    <TableCell>{item.min}</TableCell>
-                    <TableCell className="font-semibold text-primary">{item.ziel}</TableCell>
-                    <TableCell>{item.stretch}</TableCell>
-                    <TableCell>{item.methode}</TableCell>
+                    <TableCell className="font-medium">{item.category}</TableCell>
+                    <TableCell>{item.criterion}</TableCell>
+                    <TableCell>{item.method}</TableCell>
+                    <TableCell>{item.threshold}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
