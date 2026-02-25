@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Users, Target, Lightbulb, CheckSquare, BarChart, User, AlertTriangle, FileText, Smile, Zap, ShieldCheck } from 'lucide-react';
+import { Users, Target, Lightbulb, FileText, BarChart, User, AlertTriangle, Zap, Smile, ShieldCheck, Search, Scale, PenSquare, Wallet, Megaphone, ArrowRight } from 'lucide-react';
 
 const painPoints = [
     { phase: 'Wohnung gefunden', point: 'Kautionskonto-Eröffnung ist papierlastig', impact: 'Zeitdruck durch Vermieter' },
@@ -12,10 +12,68 @@ const painPoints = [
     { phase: 'Vertrauen', point: 'Angst vor rechtlichen Fehlern', impact: 'Unsicherheit gegenüber Bankprozess' },
 ];
 
+const journeyPhases = [
+  {
+    phase: "1. Awareness",
+    emotion: "Vorfreude & Stress",
+    icon: Search,
+    color: "text-blue-500",
+    details: [
+      { label: "Aktion", text: "Intensive Suche auf Immobilienportalen." },
+      { label: "Touchpoint", text: "Homegate, ImmoScout24 etc." }
+    ]
+  },
+  {
+    phase: "2. Consideration",
+    emotion: "Verwirrung & Unsicherheit",
+    icon: Scale,
+    color: "text-yellow-500",
+    details: [
+      { label: "Aktion", text: "Vergleich von Kautionsdepot (Bank) vs. Kautionsversicherung." },
+      { label: "Touchpoint", text: "UBS Website, Comparis, Foren." }
+    ]
+  },
+  {
+    phase: "3. Purchase",
+    emotion: "Frustration & Angst",
+    icon: PenSquare,
+    color: "text-red-500",
+    painPoint: "Physische Unterschriften-Rallye. Der Vermieter droht mit Absage, da die Bestätigung fehlt.",
+    details: [
+      { label: "Aktion", text: "Eröffnung des Mietkautionskontos für die WG." },
+      { label: "Touchpoint", text: "UBS Filiale, Postweg, E-Banking (limitiert)." }
+    ],
+    isCritical: true
+  },
+  {
+    phase: "4. Retention",
+    emotion: "Anspannung & Misstrauen",
+    icon: Wallet,
+    color: "text-orange-500",
+    painPoint: "Intransparenz, wer wem wie viel für Internet, Strom und Serafe schuldet.",
+    details: [
+      { label: "Aktion", text: "Monatliche Mietzahlungen & Verwaltung der WG-Kasse." },
+      { label: "Touchpoint", text: "E-Banking, Twint, Excel-Listen." }
+    ],
+    isCritical: true
+  },
+  {
+    phase: "5. Advocacy",
+    emotion: "Erleichterung oder Ärger",
+    icon: Megaphone,
+    color: "text-green-500",
+    details: [
+      { label: "Aktion", text: "Empfehlung (oder Warnung) an Freunde und Bekannte." },
+      { label: "Touchpoint", text: "Mundpropaganda, Social Media." }
+    ]
+  }
+];
+
+
 export default function Situationsanalyse() {
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-foreground">A1: Situationsanalyse &amp; Zieldefinition</h1>
+      <h1 className="text-3xl font-bold text-foreground">A1: Situationsanalyse & Zieldefinition</h1>
 
       <Card>
         <CardHeader>
@@ -31,40 +89,17 @@ export default function Situationsanalyse() {
           </div>
           <div>
             <h3 className="font-semibold text-lg mb-2 flex items-center gap-2"><User /> <span>Zielgruppe: Persona Jan (21)</span></h3>
-            <ul className="list-disc list-inside text-muted-foreground space-y-1">
+             <ul className="list-disc list-inside text-muted-foreground space-y-1">
               <li>Student, WG-Neuling, zieht erstmals aus dem Elternhaus aus</li>
               <li>Begrenztes Budget & wenig Erfahrung mit Verträgen & Kaution</li>
               <li>Will Konflikte mit Mitbewohnern vermeiden</li>
               <li>Erwartet digitale, einfache Lösungen und von UBS Vertrauen, Kompetenz & Sicherheit</li>
             </ul>
           </div>
-          <div>
-            <h3 className="font-semibold text-lg mb-2">Zentrale Pain Points der Journey</h3>
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Phase</TableHead>
-                    <TableHead>Pain Point</TableHead>
-                    <TableHead>Auswirkung</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {painPoints.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{item.phase}</TableCell>
-                      <TableCell>{item.point}</TableCell>
-                      <TableCell className="text-destructive">{item.impact}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </div>
         </CardContent>
       </Card>
-
-      <Card>
+      
+       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Users className="text-primary" /><span>Erweiterte Stakeholder-Map</span></CardTitle>
         </CardHeader>
@@ -100,6 +135,54 @@ export default function Situationsanalyse() {
                 <p className="text-xs text-muted-foreground">(Low Power / Low Interest)</p>
               </div>
             </div>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <ArrowRight className="text-primary" />
+            <span>Customer Journey Map</span>
+          </CardTitle>
+           <CardDescription>Die kritischsten Phasen sind "Purchase" und "Retention", wo die grössten Pain Points liegen.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="relative overflow-x-auto pb-4">
+            <div className="flex w-fit items-start gap-4 md:gap-6">
+              {journeyPhases.map((item, index) => (
+                <React.Fragment key={item.phase}>
+                  <Card className={`w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                         <item.icon className={`size-6 ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
+                         <CardTitle>{item.phase}</CardTitle>
+                      </div>
+                      <CardDescription className={`${item.isCritical ? 'text-destructive' : ''}`}>{item.emotion}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2 text-sm">
+                      {item.details.map(detail => (
+                        <div key={detail.label}>
+                          <p className="font-semibold">{detail.label}</p>
+                          <p className="text-muted-foreground">{detail.text}</p>
+                        </div>
+                      ))}
+                      {item.painPoint && (
+                        <div className="pt-2">
+                          <p className="font-semibold text-destructive flex items-center gap-1"><AlertTriangle className="size-4" /> Pain Point</p>
+                          <p className="text-destructive/90">{item.painPoint}</p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                   {index < journeyPhases.length - 1 && (
+                    <div className="self-center">
+                      <ArrowRight className="size-8 text-muted-foreground/50 hidden md:block" />
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
         </CardContent>
       </Card>
 
