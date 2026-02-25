@@ -1,16 +1,7 @@
 import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Users, Target, Lightbulb, FileText, BarChart, User, AlertTriangle, Zap, Smile, ShieldCheck, Search, Scale, PenSquare, Wallet, Megaphone, ArrowRight } from 'lucide-react';
-
-const painPoints = [
-    { phase: 'Wohnung gefunden', point: 'Kautionskonto-Eröffnung ist papierlastig', impact: 'Zeitdruck durch Vermieter' },
-    { phase: 'Koordination WG', point: 'Alle müssen physisch oder nacheinander signieren', impact: 'Verzögerungen & Stress' },
-    { phase: 'Finanzorganisation', point: 'Unklar, wer welchen Anteil zahlt', impact: 'Konfliktpotenzial' },
-    { phase: 'Budgetplanung', point: 'Keine Übersicht über neue Fixkosten', impact: 'Finanzielle Unsicherheit' },
-    { phase: 'Vertrauen', point: 'Angst vor rechtlichen Fehlern', impact: 'Unsicherheit gegenüber Bankprozess' },
-];
 
 const journeyPhases = [
   {
@@ -147,11 +138,11 @@ export default function Situationsanalyse() {
            <CardDescription>Die kritischsten Phasen sind "Purchase" und "Retention", wo die grössten Pain Points liegen.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="relative overflow-x-auto pb-4">
-            <div className="flex w-fit items-start gap-4 md:gap-6">
+          <div className="md:overflow-x-auto md:pb-4">
+            <div className="flex flex-col md:flex-row md:space-x-4 md:w-max">
               {journeyPhases.map((item, index) => (
                 <React.Fragment key={item.phase}>
-                  <Card className={`w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
+                  <Card className={`w-full md:w-[280px] shrink-0 ${item.isCritical ? 'border-destructive bg-destructive/5' : ''}`}>
                     <CardHeader>
                       <div className="flex items-center gap-2">
                          <item.icon className={`size-6 ${item.isCritical ? 'text-destructive' : 'text-primary' }`} />
@@ -175,8 +166,9 @@ export default function Situationsanalyse() {
                     </CardContent>
                   </Card>
                    {index < journeyPhases.length - 1 && (
-                    <div className="self-center">
+                    <div className="flex justify-center items-center my-4 md:my-0 md:self-center">
                       <ArrowRight className="size-8 text-muted-foreground/50 hidden md:block" />
+                      <div className="w-px h-8 bg-border md:hidden"></div>
                     </div>
                   )}
                 </React.Fragment>
