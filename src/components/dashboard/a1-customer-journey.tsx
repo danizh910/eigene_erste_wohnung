@@ -47,31 +47,24 @@ const phases: JourneyPhase[] = [
     opportunity: ['WG-spezifische Entscheidungs-Hilfe (klarer Vergleich).', '„In WGs gilt: So löst UBS die Multi-Party-Signatur“.'],
   },
   {
-    phase: 'Phase 3: Purchase (kritisch)',
-    situation: 'Konto eröffnen, Unterschriften koordinieren. Hier scheitert es häufig.',
+    phase: 'Phase 3: Purchase (kritische Phase)',
+    situation: 'Eröffnung des Kautionskontos unter Fristdruck.',
     microSteps: [
-      'Jan startet Online-Prozess (oder versucht es).',
-      'System verlangt Daten / Dokumente.',
-      'System verlangt Unterschriften (oft physisch oder sequentiell).',
-      'Jan versucht Termine zu koordinieren.',
-      'Jan merkt: „Das blockiert die Frist.“',
-      'Jan sucht Alternativen.',
-      'Stress eskaliert: Schuldzuweisungen drohen.',
-    ],
-    microSubSteps: [
-      'Mitbewohner haben Arbeit/Uni.',
-      'niemand hat gleiche Zeit.',
-      'Kautionsversicherung (schnell).',
-      'andere Bank.',
-      'Vermieter um Frist bitten (unangenehm).',
+      'Kernproblem: Sequentielle, teilweise physische Mehrparteien-Signatur verhindert schnellen Abschluss.',
+      'Root Cause: Medienbruch (digital -> physisch).',
+      'Root Cause: fehlende asynchrone Multi-Party-Unterzeichnung.',
+      'Root Cause: keine Status-Transparenz.',
+      'Folge: Fristangst.',
+      'Folge: Koordinationsstress.',
+      'Folge: Wechsel zu Kautionsversicherung.',
     ],
     touchpoints: ['UBS App', 'Filiale', 'Post', 'E-Mail', 'Mitbewohnergeräte'],
-    emotion: '„Wir schaffen den physischen Termin nie!“ -> Angst',
-    painPoint: 'Medienbruch + fehlende asynchrone Multi-Party-Unterzeichnung.',
+    emotion: 'Zeitdruck und Unsicherheit dominieren den Prozess.',
+    painPoint: 'Sequentielle, teilweise physische Mehrparteien-Signatur blockiert den Abschluss.',
     opportunity: [
-      '100% digital + simultan (jeder unabhängig).',
-      'Invite-Links + Status + Reminder.',
-      'Bestätigung an Vermieter automatisch.',
+      '100% digitale, simultane Signatur.',
+      'Invite-Links mit Statusanzeige.',
+      'automatische Bestätigung an Vermieter.',
     ],
   },
   {
@@ -117,21 +110,21 @@ export default function A1CustomerJourney() {
       <Card className="border-primary/30 bg-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Route className="size-5 text-primary" /> Warum Journey?
+            <Route className="size-5 text-primary" /> Warum Customer Journey?
           </CardTitle>
           <CardDescription>
-            Pain Points stecken oft nicht im Produkt, sondern in den Übergängen zwischen Touchpoints (Medienbrüche).
+            Die Hauptprobleme entstehen nicht im Produkt selbst, sondern im Übergang zwischen Touchpoints (Medienbrüche).
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3 text-sm">
           <p>
-            <strong>Zentraler Befund:</strong> Phase „Purchase“ hat das höchste Abwanderungsrisiko.
+            <strong>Das höchste Abwanderungsrisiko liegt in der Phase „Purchase“.</strong>
           </p>
           <ul className="list-disc list-inside text-muted-foreground space-y-1">
             <li>Micro-Steps</li>
             <li>Touchpoints</li>
             <li>Gedanken/Emotion</li>
-            <li>Pain Point (root cause)</li>
+            <li>Pain Point (Root Cause)</li>
             <li>Design Opportunity (was UBS tun kann)</li>
           </ul>
         </CardContent>

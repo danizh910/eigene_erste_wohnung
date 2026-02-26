@@ -10,22 +10,23 @@ export default function A1IstAnalyse() {
           <CardTitle>Kontext</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-lg leading-8">
-          <p>
-            Der erste eigene Wohnraum ist ein Übergang in Selbstständigkeit: emotional positiv (Freiheit),
-            gleichzeitig finanziell riskant (erste grosse Verpflichtungen).
-          </p>
           <div>
-            <h3 className="font-semibold mb-2">Was typisch passiert:</h3>
+            <h3 className="font-semibold mb-2">Warum ist die erste eigene Wohnung ein kritischer Life Moment?</h3>
+            <p>
+              Der erste eigene Wohnraum markiert den Übergang in finanzielle Selbstständigkeit.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-2">Charakteristisch sind:</h3>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Neue Fixkosten (Miete, Nebenkosten, Internet, Strom, Möbel).</li>
-              <li>Hohe Einmalzahlungen (Kaution, erste Miete, Umzug).</li>
-              <li>Unbekannte Prozesse (Mietvertrag, Fristen, rechtliche Begriffe).</li>
+              <li>neue Fixkosten (Miete, Nebenkosten, Strom, Internet)</li>
+              <li>hohe Einmalzahlungen (Kaution, Umzug, Möbel)</li>
+              <li>rechtliche Unsicherheit (Vertragsbegriffe, Fristen, Haftung)</li>
             </ul>
           </div>
           <p>
-            <strong>Denkweise dahinter:</strong> Ein Life Moment ist ideal für proaktive Begleitung,
-            weil Kund:innen in dieser Phase offen für Unterstützung sind, aber schnell frustrieren,
-            wenn Prozesse kompliziert werden.
+            In solchen Übergangssituationen steigt die Entscheidungsanfälligkeit für einfache, schnelle Lösungen.
+            Komplexe Prozesse erhöhen die Abwanderungswahrscheinlichkeit.
           </p>
         </CardContent>
       </Card>
