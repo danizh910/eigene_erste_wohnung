@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ClipboardCheck, ListOrdered, Microscope, Target, FileText } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, ClipboardCheck, FileText, ListOrdered, Microscope, Target } from 'lucide-react';
 
 type B1Deliverable = {
   id: string;
@@ -44,39 +47,7 @@ const deliverables: B1Deliverable[] = [
       'Quantitative und qualitative Abdeckung.',
       'Konkrete Iterationslogik bei Nichterreichung.',
     ],
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-
-const executiveSummary = [
-  'Problem: WG-Erstmieter:innen erleben bei der Mietkautions-Eröffnung langsame, sequentielle und medienbruchanfällige Abläufe.',
-  'Kontext: Der Life Moment „erste eigene Wohnung“ verbindet Fristdruck, neue finanzielle Verantwortung und rechtliche Unsicherheit.',
-  'Zielgruppe: Junge Erwachsene in WGs mit mehreren Beteiligten und gemeinsamem Koordinationsbedarf.',
-  'Projektziel: Abschluss in maximal 10 Minuten testbar machen, Medienbrüche eliminieren und Rechtssicherheit messbar absichern.',
-  'Risikofokus: Höchstes Abbruchrisiko in der Purchase-Phase durch Signatur- und Statusprobleme.',
-  'Steuerungslogik: Drei priorisierte Pain Points, drei priorisierte HMW-Fragen, drei messbare SMART-Ziele.',
-  'Review-Rhythmus: Sprint Tag 4 (Prototyp-Test) und Tag 5 (Final Review) mit klaren Go/No-Go-Kriterien.',
-  'Entscheidungsregel: Bei Zielverfehlung folgt eine verpflichtende Iteration vor Freigabe.',
-];
-
-const painPoints = [
-  {
-    rank: 1,
-    title: 'Sequentielle Mehrparteien-Signatur unter Fristdruck',
-    rationale: 'Direkter Blocker in der Purchase-Phase mit dem grössten Einfluss auf Abbruch und Verzögerung.',
   },
-  {
-    rank: 2,
-    title: 'Fehlende Status-Transparenz für alle Beteiligten',
-    rationale: 'Verursacht Rückfragen, Parallelkommunikation und zusätzliche Koordinationsschleifen.',
-  },
-  {
-    rank: 3,
-    title: 'Unklare rechtliche Einordnung bei Erstmieter:innen',
-    rationale: 'Erhöht Unsicherheit und senkt die Bereitschaft, den Prozess ohne Alternativsuche abzuschliessen.',
-  },
-];
-
-const hmw = [
   {
     id: 'b1-test-evidenz',
     title: 'B1.4 Test-Evidenz',
@@ -101,40 +72,37 @@ const hmw = [
   },
 ];
 
-export default function Erfolgskriterien() {
-  return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold">B1: Erfolgskriterien & Review</h1>
+const executiveSummary = [
+  'Problem: WG-Erstmieter:innen erleben bei der Mietkautions-Eröffnung langsame, sequentielle und medienbruchanfällige Abläufe.',
+  'Kontext: Der Life Moment „erste eigene Wohnung“ verbindet Fristdruck, neue finanzielle Verantwortung und rechtliche Unsicherheit.',
+  'Zielgruppe: Junge Erwachsene in WGs mit mehreren Beteiligten und gemeinsamem Koordinationsbedarf.',
+  'Projektziel: Abschluss in maximal 10 Minuten testbar machen, Medienbrüche eliminieren und Rechtssicherheit messbar absichern.',
+  'Risikofokus: Höchstes Abbruchrisiko in der Purchase-Phase durch Signatur- und Statusprobleme.',
+  'Steuerungslogik: Drei priorisierte Pain Points, drei priorisierte HMW-Fragen, drei messbare SMART-Ziele.',
+  'Review-Rhythmus: Sprint Tag 4 (Prototyp-Test) und Sprint Tag 5 (Final Review) mit klaren Go/No-Go-Kriterien.',
+  'Entscheidungsregel: Bei Zielverfehlung folgt eine verpflichtende Iteration vor Freigabe.',
+];
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Überblick B1</CardTitle>
-          <CardDescription>
-            Wie bei A1 ist B1 jetzt in Unterseiten gegliedert. Jedes Thema hat eine eigene Detailseite mit vollständigen Inhalten.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          {deliverables.map((item) => (
-            <div key={item.id} className="rounded-xl border bg-card p-5 shadow-sm">
-              <h3 className="font-semibold flex items-center gap-2 text-base">
-                <item.icon className="size-5 text-primary" />
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
-              <ul className="mt-4 space-y-1 text-sm text-muted-foreground list-disc list-inside">
-                {item.preview.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <div className="mt-5 pt-4 border-t">
-                <Button asChild size="sm" className="w-full sm:w-auto">
-                  <Link href={`/?section=${item.id}`}>
-                    Öffnen <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          ))}
+const painPoints = [
+  {
+    rank: 1,
+    title: 'Sequentielle Mehrparteien-Signatur unter Fristdruck',
+    rationale: 'Direkter Blocker in der Purchase-Phase mit dem grössten Einfluss auf Abbruch und Verzögerung.',
+  },
+  {
+    rank: 2,
+    title: 'Fehlende Status-Transparenz für alle Beteiligten',
+    rationale: 'Verursacht Rückfragen, Parallelkommunikation und zusätzliche Koordinationsschleifen.',
+  },
+  {
+    rank: 3,
+    title: 'Unklare rechtliche Einordnung bei Erstmieter:innen',
+    rationale: 'Erhöht Unsicherheit und senkt die Bereitschaft, den Prozess ohne Alternativsuche abzuschliessen.',
+  },
+];
+
+const hmw = [
+  {
     id: 'HMW 1',
     question: 'Wie könnten wir eine rechtlich anerkannte, simultane Multi-Party-Signatur ohne Medienbruch ermöglichen?',
     reason: 'Leitet sich direkt aus Pain Point 1 ab und adressiert den zentralen Abschluss-Blocker.',
@@ -224,67 +192,69 @@ const evidence = [
 export default function Erfolgskriterien() {
   return (
     <div className="space-y-8">
+      <h1 className="text-3xl font-bold">B1: Erfolgskriterien & Review</h1>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Überblick B1</CardTitle>
+          <CardDescription>
+            Wie bei A1 ist B1 in Unterseiten gegliedert. Jedes Thema hat eine eigene Detailseite mit vollständigen Inhalten.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          {deliverables.map((item) => (
+            <div key={item.id} className="rounded-xl border bg-card p-5 shadow-sm">
+              <h3 className="font-semibold flex items-center gap-2 text-base">
+                <item.icon className="size-5 text-primary" />
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+              <ul className="mt-4 space-y-1 text-sm text-muted-foreground list-disc list-inside">
+                {item.preview.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <div className="mt-5 pt-4 border-t">
+                <Button asChild size="sm" className="w-full sm:w-auto">
+                  <Link href={`/?section=${item.id}`}>
+                    Öffnen <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
       <Card className="border-primary/40 bg-primary/5">
         <CardHeader>
-          <CardTitle className="text-2xl">Executive Summary</CardTitle>
-          <CardDescription>Abgabeformat für Management-Review in linearer Leselogik.</CardDescription>
+          <CardTitle className="text-xl">Executive Summary</CardTitle>
+          <CardDescription>
+            Kompakte Management-Übersicht mit Problem, Kontext, Zielgruppe, Projektziel und Entscheidungslogik.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <ul className="list-disc list-inside space-y-1 text-sm leading-6">
-            {executiveSummary.map((line) => (
-              <li key={line}>{line}</li>
+          <ul className="space-y-2 text-sm leading-6 text-foreground">
+            {executiveSummary.map((point) => (
+              <li key={point} className="list-disc list-inside">
+                {point}
+              </li>
             ))}
           </ul>
         </CardContent>
       </Card>
 
-      <h1 className="text-3xl font-bold">B1 – ABGABEFORMAT (IST → PROBLEM → HMW → SMART)</h1>
-
       <Card>
         <CardHeader>
-          <CardTitle>Ist-Analyse</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-5 text-sm leading-6">
-          <section>
-            <h3 className="font-semibold text-base">Kontext</h3>
-            <p className="text-muted-foreground">
-              Die erste eigene Wohnung ist ein High-Pressure-Life-Moment mit Fristdruck, begrenzter Erfahrung
-              und hoher finanzieller Relevanz.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-semibold text-base">Stakeholder Map</h3>
-            <p className="text-muted-foreground">
-              Hauptmieter:in, Mitbewohner:innen, Vermieter:in und UBS-Prozess bestimmen den operativen Ablauf;
-              Rechtsdienst und Bürgschaften beeinflussen Vertrauen und Entscheidung.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-semibold text-base">Customer Journey</h3>
-            <p className="text-muted-foreground">
-              Kritischer Bruchpunkt ist die Phase „Purchase“: Signaturkoordination und Medienwechsel verzögern den Abschluss.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-semibold text-base">Pain Points</h3>
-            <ul className="list-disc list-inside text-muted-foreground space-y-1">
-              {painPoints.map((item) => (
-                <li key={item.title}>{item.title}</li>
-              ))}
-            </ul>
-          </section>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Top 3 Pain Points</CardTitle>
+          <CardTitle>Top-3 Pain Points</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm">
-          {painPoints.map((item) => (
-            <div key={item.title} className="rounded-lg border p-3">
-              <p className="font-semibold">{item.rank}. {item.title}</p>
-              <p className="text-muted-foreground">Begründung: {item.rationale}</p>
+          {painPoints.map((point) => (
+            <div key={point.rank} className="rounded-lg border p-3">
+              <p className="font-semibold">
+                {point.rank}. {point.title}
+              </p>
+              <p className="text-muted-foreground">{point.rationale}</p>
             </div>
           ))}
         </CardContent>
@@ -292,7 +262,7 @@ export default function Erfolgskriterien() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Problemstatement</CardTitle>
+          <CardTitle>Problem Statement</CardTitle>
         </CardHeader>
         <CardContent className="text-sm leading-6">
           Junge Erwachsene in WGs erleben bei der Eröffnung eines Mietkautionskontos unter Fristdruck langsame,
@@ -370,12 +340,20 @@ export default function Erfolgskriterien() {
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
           {criteria.map((item) => (
-            <div key={item.title} className="rounded-lg border p-3 space-y-1">
+            <div key={item.title} className="space-y-1 rounded-lg border p-3">
               <p className="font-semibold">{item.title}</p>
-              <p><strong>Präzise Aussage:</strong> {item.statement}</p>
-              <p><strong>Zugeordnetes SMART-Ziel:</strong> {item.smartRef}</p>
-              <p><strong>Überprüfungsmethode:</strong> {item.method}</p>
-              <p><strong>Review-Zeitpunkt:</strong> {item.review}</p>
+              <p>
+                <strong>Präzise Aussage:</strong> {item.statement}
+              </p>
+              <p>
+                <strong>Zugeordnetes SMART-Ziel:</strong> {item.smartRef}
+              </p>
+              <p>
+                <strong>Überprüfungsmethode:</strong> {item.method}
+              </p>
+              <p>
+                <strong>Review-Zeitpunkt:</strong> {item.review}
+              </p>
             </div>
           ))}
         </CardContent>
@@ -387,11 +365,21 @@ export default function Erfolgskriterien() {
           <CardDescription>Review & Entscheidungslogik</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2 text-sm leading-6">
-          <p><strong>Wann wird reviewed?</strong> Sprint Tag 4 (Prototyp-Test) und Sprint Tag 5 (Final Review).</p>
-          <p><strong>Wer entscheidet?</strong> Produktverantwortung, UX-Lead und Prozessverantwortliche im gemeinsamen Review-Board.</p>
-          <p><strong>Was passiert bei Nichterreichung?</strong> Das Ziel wird als Blocker markiert; Freigabe erfolgt erst nach Iteration.</p>
-          <p><strong>Welche Iteration folgt?</strong> Vereinfachung des Signaturflusses, klarere Statusführung, präzisere Rechtstexte.</p>
-          <p><strong>Massnahmen bei Zielverfehlung:</strong> Navigation vereinfachen, Signaturprozess verkürzen, Hinweise sichtbarer machen.</p>
+          <p>
+            <strong>Wann wird reviewed?</strong> Sprint Tag 4 (Prototyp-Test) und Sprint Tag 5 (Final Review).
+          </p>
+          <p>
+            <strong>Wer entscheidet?</strong> Produktverantwortung, UX-Lead und Prozessverantwortliche im gemeinsamen Review-Board.
+          </p>
+          <p>
+            <strong>Was passiert bei Nichterreichung?</strong> Das Ziel wird als Blocker markiert; Freigabe erfolgt erst nach Iteration.
+          </p>
+          <p>
+            <strong>Welche Iteration folgt?</strong> Vereinfachung des Signaturflusses, klarere Statusführung, präzisere Rechtstexte.
+          </p>
+          <p>
+            <strong>Massnahmen bei Zielverfehlung:</strong> Navigation vereinfachen, Signaturprozess verkürzen, Hinweise sichtbarer machen.
+          </p>
         </CardContent>
       </Card>
 
@@ -424,10 +412,16 @@ export default function Erfolgskriterien() {
             </TableBody>
           </Table>
 
-          <div className="text-sm space-y-1">
-            <p><strong>Zitat 1:</strong> „Ich sehe sofort, wer noch offen ist.“</p>
-            <p><strong>Zitat 2:</strong> „Der Invite ist klar, aber der Einstieg darf prominenter sein.“</p>
-            <p><strong>Zitat 3:</strong> „Die rechtlichen Hinweise sind kurz und verständlich.“</p>
+          <div className="space-y-1 text-sm">
+            <p>
+              <strong>Zitat 1:</strong> „Ich sehe sofort, wer noch offen ist.“
+            </p>
+            <p>
+              <strong>Zitat 2:</strong> „Der Invite ist klar, aber der Einstieg darf prominenter sein.“
+            </p>
+            <p>
+              <strong>Zitat 3:</strong> „Die rechtlichen Hinweise sind kurz und verständlich.“
+            </p>
             <p className="text-muted-foreground">
               Kurzfazit: Vertrauen ist im Zielbereich, Prozessdauer ist knapp darunter, Invite-Task bleibt Hauptfokus der nächsten Iteration.
             </p>
