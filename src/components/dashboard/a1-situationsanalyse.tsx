@@ -23,6 +23,12 @@ const deliverables: Deliverable[] = [
       'WG-Dynamik verstärkt Komplexität und Koordinationsaufwand.',
       'Fokus auf Klarheit, Sicherheit und einfache Prozessführung.',
     ],
+const deliverables = [
+  {
+    id: 'a1-ist-analyse',
+    title: 'A1.1 Ist-Analyse (Situationsanalyse)',
+    description: 'Kontext, Zielgruppe und die wichtigsten WG-spezifischen Schmerzpunkte im Detail.',
+    icon: ClipboardList,
   },
   {
     id: 'a1-stakeholder-map',
@@ -34,6 +40,8 @@ const deliverables: Deliverable[] = [
       'Keep Satisfied/Informed: Rechtsdienst, WG-Mitglieder, Eltern/Bürgen.',
       'Ziel: Prozess so aufsetzen, dass High-Power-Stakeholder nicht blockieren.',
     ],
+    description: 'Einordnung nach Power/Interest inklusive Denklogik und Blockadepotenzial.',
+    icon: Users,
   },
   {
     id: 'a1-customer-journey',
@@ -45,6 +53,8 @@ const deliverables: Deliverable[] = [
       'Pain entsteht an Übergängen zwischen Touchpoints (Medienbrüche).',
       'Design-Fokus: 100% digital, asynchron/simultan, klare Statusführung.',
     ],
+    description: 'Alle Phasen von Awareness bis Advocacy mit Touchpoints, Emotionen und Pain Points.',
+    icon: Route,
   },
   {
     id: 'a1-zieldefinition',
@@ -56,6 +66,8 @@ const deliverables: Deliverable[] = [
       'HMW-Fragen zu Multi-Party-Signatur, Transparenz und Automatisierung.',
       'SMART-Ziele für Zeit, Usability und Vertrauen/Compliance.',
     ],
+    description: 'Konkrete Zielsetzung und Leitfragen für die folgenden Lieferobjekte.',
+    icon: Target,
   },
 ];
 
@@ -88,6 +100,21 @@ export default function Situationsanalyse() {
 
               <div className="mt-5 pt-4 border-t">
                 <Button asChild size="sm" className="w-full sm:w-auto">
+            Für jedes Lieferobjekt gibt es jetzt einen eigenen Unterpunkt mit separater Seite für detailliertere Inhalte.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {deliverables.map((item) => (
+            <div key={item.id} className="rounded-lg border bg-card p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <item.icon className="size-5 text-primary" />
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+                </div>
+                <Button asChild size="sm" className="shrink-0">
                   <Link href={`/?section=${item.id}`}>
                     Öffnen <ArrowRight className="size-4" />
                   </Link>

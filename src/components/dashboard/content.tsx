@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Situationsanalyse from './a1-situationsanalyse';
 import A1IstAnalyse from './a1-ist-analyse';
 import A1StakeholderMap from './a1-stakeholder-map';
@@ -31,9 +30,11 @@ const sections: { [key: string]: React.ComponentType<{ title?: string }> } = {
   h1: () => <Placeholder title="H1: Pitch" />,
 };
 
-export default function DashboardContent() {
-  const searchParams = useSearchParams();
-  const section = searchParams.get('section') || 'a1';
+type DashboardContentProps = {
+  section: string;
+};
+
+export default function DashboardContent({ section }: DashboardContentProps) {
   const Component = sections[section] || sections.a1;
 
   return (
