@@ -7,13 +7,29 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function Home() {
   return (
     <SidebarProvider>
-      <DashboardSidebar />
+      <Suspense fallback={<SidebarLoading />}>
+        <DashboardSidebar />
+      </Suspense>
       <SidebarInset>
         <Suspense fallback={<DashboardLoading />}>
           <DashboardContent />
         </Suspense>
       </SidebarInset>
     </SidebarProvider>
+  );
+}
+
+function SidebarLoading() {
+  return (
+    <div className="w-64 border-r border-sidebar-border p-4 hidden md:block animate-pulse">
+      <Skeleton className="h-8 w-40 mb-6" />
+      <div className="space-y-3">
+        <Skeleton className="h-9 w-full" />
+        <Skeleton className="h-9 w-full" />
+        <Skeleton className="h-9 w-full" />
+        <Skeleton className="h-9 w-full" />
+      </div>
+    </div>
   );
 }
 
