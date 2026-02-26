@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'UBS Life Moments Sprint Hub',
-  description: 'Sprint-Dashboard for the UBS Life Moments project, focusing on "Erste eigene Wohnung".',
+  description: 'Sprint-Dashboard für das UBS Life Moments Projekt, Fokus "Erste eigene Wohnung".',
 };
 
 export default function RootLayout({

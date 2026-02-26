@@ -63,7 +63,7 @@ export function DashboardSidebar() {
             <SidebarMenuButton
               onClick={() => handleNavigation(item.id)}
               isActive={activeSection === item.id}
-              tooltip={{children: item.label, side: 'right'}}
+              tooltip={item.label}
             >
               <item.icon />
               <span>{item.label}</span>
@@ -72,7 +72,7 @@ export function DashboardSidebar() {
         ))}
       </SidebarMenu>
       <SidebarFooter className="border-t border-sidebar-border p-4">
-        <p className="text-xs text-muted-foreground">&copy; 2024 ÜK Modul 368</p>
+        <p className="text-[10px] text-muted-foreground">&copy; 2024 ÜK Modul 368</p>
       </SidebarFooter>
     </Sidebar>
   );
