@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function A1IstAnalyse() {
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold">A1.1 Ist-Analyse (Situationsanalyse)</h1>
+      <h1 className="text-3xl font-bold">A1.1 Ist-Analyse</h1>
 
       <Card>
         <CardHeader>

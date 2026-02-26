@@ -20,6 +20,7 @@ export default function Home() {
 }
 
 function SidebarLoading() {
+  // Fallback for query-param based sidebar navigation during suspense hydration.
   return (
     <aside className="hidden md:flex h-screen w-64 shrink-0 flex-col border-r p-4 gap-4 animate-pulse">
       <Skeleton className="h-8 w-40" />

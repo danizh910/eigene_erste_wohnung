@@ -36,8 +36,8 @@ export default function A1Zieldefinition() {
           <div>
             <h3 className="font-semibold text-lg">Ziel des Projekts</h3>
             <p>
-              Reduktion der Prozessdauer, Eliminierung von Medienbrüchen und Erhöhung der wahrgenommenen
-              Rechtssicherheit bei der WG-Kautionseröffnung.
+              Reduktion der Prozessdauer, Eliminierung von Medienbrüchen und messbare Absicherung der
+              wahrgenommenen Rechtssicherheit bei der WG-Kautionseröffnung.
             </p>
           </div>
         </CardContent>

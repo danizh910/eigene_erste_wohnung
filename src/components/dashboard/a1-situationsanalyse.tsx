@@ -68,7 +68,7 @@ export default function Situationsanalyse() {
         <CardHeader>
           <CardTitle>Überblick A1</CardTitle>
           <CardDescription>
-            Hier siehst du pro Lieferobjekt zuerst eine kurze Preview-Zusammenfassung und darunter den Button zur Detailseite.
+            Lineare Übersicht: pro Lieferobjekt zuerst Kurzinhalt, darunter direkter Einstieg in die Detailseite.
           </CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 xl:grid-cols-2 gap-4">

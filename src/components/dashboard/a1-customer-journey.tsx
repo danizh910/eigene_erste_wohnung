@@ -59,7 +59,7 @@ const phases: JourneyPhase[] = [
       'Folge: Wechsel zu Kautionsversicherung.',
     ],
     touchpoints: ['UBS App', 'Filiale', 'Post', 'E-Mail', 'Mitbewohnergeräte'],
-    emotion: 'Zeitdruck und Unsicherheit dominieren den Prozess.',
+    emotion: 'Zeitdruck, Fristangst und Unsicherheit dominieren den Prozess.',
     painPoint: 'Sequentielle, teilweise physische Mehrparteien-Signatur blockiert den Abschluss.',
     opportunity: [
       '100% digitale, simultane Signatur.',
