@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import {
   Home,
   FileText,
@@ -31,17 +31,17 @@ const menuItems = [
   { id: 'h1', label: 'H1: Pitch', icon: Presentation },
 ];
 
-export function DashboardSidebar() {
-  const searchParams = useSearchParams();
+type DashboardSidebarProps = {
+  activeSection: string;
+};
+
+export function DashboardSidebar({ activeSection }: DashboardSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const activeSection = searchParams.get('section') || 'a1';
   const { setOpenMobile } = useSidebar();
 
   const handleNavigation = (section: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('section', section);
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?section=${section}`);
     setOpenMobile(false);
   };
 

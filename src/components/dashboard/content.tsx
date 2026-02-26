@@ -1,11 +1,10 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Situationsanalyse from './a1-situationsanalyse';
 import Erfolgskriterien from './b1-erfolgskriterien';
 import Placeholder from './placeholder';
 
-const sections: { [key: string]: React.ComponentType<{title?: string}> } = {
+const sections: { [key: string]: React.ComponentType<{ title?: string }> } = {
   a1: Situationsanalyse,
   b1: Erfolgskriterien,
   c1: () => <Placeholder title="C1-C3: Ideation" />,
@@ -14,9 +13,11 @@ const sections: { [key: string]: React.ComponentType<{title?: string}> } = {
   h1: () => <Placeholder title="H1: Pitch" />,
 };
 
-export default function DashboardContent() {
-  const searchParams = useSearchParams();
-  const section = searchParams.get('section') || 'a1';
+type DashboardContentProps = {
+  section: string;
+};
+
+export default function DashboardContent({ section }: DashboardContentProps) {
   const Component = sections[section] || sections.a1;
 
   return (
