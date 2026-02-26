@@ -9,6 +9,7 @@ import {
   Presentation,
   CheckCircle,
   Banknote,
+  Circle,
 } from 'lucide-react';
 
 import {
@@ -24,6 +25,10 @@ import {
 
 const menuItems = [
   { id: 'a1', label: 'A1: Situationsanalyse', icon: Home },
+  { id: 'a1-ist-analyse', label: 'A1.1 Ist-Analyse', icon: Circle, isSubItem: true },
+  { id: 'a1-stakeholder-map', label: 'A1.2 Stakeholder-Map', icon: Circle, isSubItem: true },
+  { id: 'a1-customer-journey', label: 'A1.3 Customer Journey', icon: Circle, isSubItem: true },
+  { id: 'a1-zieldefinition', label: 'A1.4 Zieldefinition', icon: Circle, isSubItem: true },
   { id: 'b1', label: 'B1: Erfolgskriterien', icon: CheckCircle },
   { id: 'c1', label: 'C1: Ideation', icon: FlaskConical },
   { id: 'd1', label: 'D1: Prototyping', icon: FileText },
@@ -64,8 +69,9 @@ export function DashboardSidebar() {
               onClick={() => handleNavigation(item.id)}
               isActive={activeSection === item.id}
               tooltip={item.label}
+              className={item.isSubItem ? 'pl-8 text-xs text-muted-foreground' : ''}
             >
-              <item.icon />
+              <item.icon className={item.isSubItem ? 'size-3' : undefined} />
               <span>{item.label}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
