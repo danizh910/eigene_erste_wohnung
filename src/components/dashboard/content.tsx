@@ -119,13 +119,14 @@ export default function DashboardContent({ section }: DashboardContentProps) {
   const { isLoaded, isSectionVisible, firstVisibleSection } = useSectionVisibility();
   const resolvedSection = isLoaded && !isSectionVisible(section) ? firstVisibleSection : section;
   const Component = sections[resolvedSection] || sections.a1;
+  const notes = thinkingNotes[resolvedSection] || thinkingNotes.a1;
 
   return (
     <div className="p-4 md:p-8 space-y-6">
       <section className="rounded-xl border border-blue-300 bg-blue-50 p-4 shadow-sm">
         <h2 className="text-sm font-semibold text-blue-900 mb-2">Unsere Denkweise und Begründung</h2>
         <ul className="list-disc list-inside space-y-1 text-sm text-blue-900/90">
-          {note.map((line) => (
+          {notes.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>
