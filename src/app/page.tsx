@@ -1,6 +1,7 @@
 import DashboardContent from '@/components/dashboard/content';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 import { DownloadPdfButton } from '@/components/dashboard/download-pdf-button';
+import { AdminAreaButton } from '@/components/dashboard/admin-area-button';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 
 type HomeProps = {
@@ -19,6 +20,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <SidebarInset>
         <DashboardContent section={activeSection} />
       </SidebarInset>
+      <AdminAreaButton />
       <DownloadPdfButton />
     </SidebarProvider>
   );
