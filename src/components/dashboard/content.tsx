@@ -11,6 +11,7 @@ import B1HmwSmart from './b1-hmw-smart';
 import B1ErfolgskriterienReview from './b1-erfolgskriterien-review';
 import B1TestEvidenz from './b1-test-evidenz';
 import Placeholder from './placeholder';
+import { useSectionVisibility } from '@/hooks/use-section-visibility';
 
 const sections: { [key: string]: React.ComponentType<{ title?: string }> } = {
   a1: Situationsanalyse,
@@ -35,7 +36,9 @@ type DashboardContentProps = {
 };
 
 export default function DashboardContent({ section }: DashboardContentProps) {
-  const Component = sections[section] || sections.a1;
+  const { isLoaded, isSectionVisible, firstVisibleSection } = useSectionVisibility();
+  const resolvedSection = isLoaded && !isSectionVisible(section) ? firstVisibleSection : section;
+  const Component = sections[resolvedSection] || sections.a1;
 
   return (
     <div className="p-4 md:p-8">
