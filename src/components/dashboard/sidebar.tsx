@@ -1,16 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import {
-  Home,
-  FileText,
-  Target,
-  FlaskConical,
-  Presentation,
-  CheckCircle,
-  Banknote,
-  Circle,
-} from 'lucide-react';
+import { Banknote, LockKeyhole } from 'lucide-react';
 
 import {
   Sidebar,
@@ -52,6 +43,9 @@ export function DashboardSidebar({ activeSection }: DashboardSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { setOpenMobile } = useSidebar();
+  const { visibility } = useSectionVisibility();
+
+  const visibleMenuItems = sectionItems.filter((item) => visibility[item.id] !== false);
 
   const handleNavigation = (section: string) => {
     router.push(`${pathname}?section=${section}`);
@@ -71,7 +65,7 @@ export function DashboardSidebar({ activeSection }: DashboardSidebarProps) {
         </div>
       </SidebarHeader>
       <SidebarMenu className="flex-1 p-2">
-        {menuItems.map((item) => (
+        {visibleMenuItems.map((item) => (
           <SidebarMenuItem key={item.id}>
             <SidebarMenuButton
               onClick={() => handleNavigation(item.id)}
@@ -85,7 +79,11 @@ export function DashboardSidebar({ activeSection }: DashboardSidebarProps) {
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
-      <SidebarFooter className="border-t border-sidebar-border p-4">
+      <SidebarFooter className="border-t border-sidebar-border p-3">
+        <SidebarMenuButton onClick={() => router.push('/admin')}>
+          <LockKeyhole className="size-4" />
+          <span>Admin Bereich</span>
+        </SidebarMenuButton>
         <p className="text-[10px] text-muted-foreground">&copy; 2024 ÜK Modul 368</p>
       </SidebarFooter>
     </Sidebar>
