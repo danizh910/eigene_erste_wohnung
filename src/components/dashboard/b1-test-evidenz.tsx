@@ -44,13 +44,15 @@ export default function B1TestEvidenz() {
             </TableBody>
           </Table>
 
-          <div className="text-sm space-y-1">
+          <div className="text-sm space-y-2">
+            <p><strong>Interpretation der Evidenz:</strong> 3 von 5 Durchläufen liegen unter 10 Minuten, ein Durchlauf knapp darüber und ein Durchlauf mit Invite-Fehler zeigt einen klaren Engpass im Einstiegspunkt.</p>
+            <p><strong>Hypothese bestätigt:</strong> Rechtliche Verständlichkeit und grundsätzliche Prozesslogik sind tragfähig; 4 von 5 Trust-Werten liegen bei 4/5 oder höher.</p>
+            <p><strong>Hypothese teilweise widerlegt:</strong> Die Annahme einer stabilen Invite-Performance wurde nicht bestätigt, da das 100%-Kriterium bei Task Success verfehlt wurde.</p>
+            <p><strong>Kritischer Fokus:</strong> Der Invite-Task bleibt der priorisierte Blocker für die nächste Iteration, da ein einzelnes Scheitern den Mehrparteien-Prozess vollständig stoppt.</p>
+            <p><strong>Ableitung nächste Iteration:</strong> Invite-Einstieg visuell und sprachlich priorisieren, Statusmeldung früher ausspielen und anschliessend mit identischem Messdesign erneut testen.</p>
             <p><strong>Zitat 1:</strong> „Ich sehe sofort, wer noch offen ist.“</p>
             <p><strong>Zitat 2:</strong> „Der Invite ist klar, aber der Einstieg darf prominenter sein.“</p>
             <p><strong>Zitat 3:</strong> „Die rechtlichen Hinweise sind kurz und verständlich.“</p>
-            <p className="text-muted-foreground">
-              Kurzfazit: Vertrauen ist im Zielbereich, Prozessdauer ist knapp darunter, Invite-Task bleibt Hauptfokus der nächsten Iteration.
-            </p>
           </div>
         </CardContent>
       </Card>

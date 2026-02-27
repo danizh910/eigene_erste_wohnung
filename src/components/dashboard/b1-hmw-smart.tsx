@@ -3,9 +3,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 
 const hmw = [
-  { id: 'HMW 1', question: 'Wie könnten wir eine rechtlich anerkannte, simultane Multi-Party-Signatur ohne Medienbruch ermöglichen?', reason: 'Leitet sich direkt aus Pain Point 1 ab und adressiert den zentralen Abschluss-Blocker.' },
-  { id: 'HMW 2', question: 'Wie könnten wir für alle Beteiligten eine durchgängige Status-Transparenz über den Eröffnungsfortschritt bereitstellen?', reason: 'Leitet sich aus Pain Point 2 ab und reduziert Koordinationsaufwand messbar.' },
-  { id: 'HMW 3', question: 'Wie könnten wir die rechtliche Logik der WG-Kaution für Erstmieter:innen verständlich und prüfbar darstellen?', reason: 'Leitet sich aus Pain Point 3 ab und stärkt nachweisbar Vertrauen in den Prozess.' },
+  { id: 'HMW 1', question: 'Wie könnten wir eine rechtlich anerkannte, simultane Multi-Party-Signatur ohne Medienbruch ermöglichen?', reason: 'Priorisiert, weil dieser Pain Point den Abschluss unmittelbar blockiert und den grössten Einfluss auf Conversion im Purchase-Moment hat.' },
+  { id: 'HMW 2', question: 'Wie könnten wir für alle Beteiligten eine durchgängige Status-Transparenz über den Eröffnungsfortschritt bereitstellen?', reason: 'Priorisiert, weil fehlende Transparenz Koordinationsschleifen erzeugt und direkt auf Prozessdauer sowie wahrgenommenen Aufwand wirkt.' },
+  { id: 'HMW 3', question: 'Wie könnten wir die rechtliche Logik der WG-Kaution für Erstmieter:innen verständlich und prüfbar darstellen?', reason: 'Priorisiert, weil rechtliche Unsicherheit den Wechsel zu vermeintlich einfacheren Alternativen beschleunigt, selbst bei funktionierendem Produktkern.' },
 ];
 
 const smartGoals = [
@@ -25,6 +25,10 @@ export default function B1HmwSmart() {
           <CardDescription>Drei priorisierte Leitfragen, direkt aus den Top-Pain-Points abgeleitet.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3 text-sm">
+          <p className="text-muted-foreground">
+            Strategische Einordnung: Die drei HMW wurden nicht nach Kreativpotenzial, sondern nach Wirkung auf den kritischen Conversion-Moment priorisiert.
+            Diese Entscheidung basiert auf der Hypothese, dass Abwanderung im Purchase/Onboarding durch Prozessfriktion ausgelöst wird.
+          </p>
           {hmw.map((item) => (
             <div key={item.id} className="rounded-lg border p-3">
               <p className="font-semibold">{item.id}</p>
@@ -38,6 +42,10 @@ export default function B1HmwSmart() {
       <Card>
         <CardHeader><CardTitle>SMART</CardTitle></CardHeader>
         <CardContent className="space-y-3 text-sm">
+          <p className="text-muted-foreground">
+            Business-Logik der Schwellenwerte: Die 10-Minuten-Grenze operationalisiert Fristtauglichkeit, 80% sichert robuste Reproduzierbarkeit in kleiner Stichprobe,
+            und das 100%-Kriterium beim Invite ist bewusst strikt, weil bereits ein einzelner Ausfall den Mehrparteien-Prozess blockiert.
+          </p>
           {smartGoals.map((goal) => (
             <div key={goal.name} className="rounded-lg border p-3">
               <p className="font-semibold">{goal.name}</p>

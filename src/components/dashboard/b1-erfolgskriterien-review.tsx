@@ -19,6 +19,10 @@ export default function B1ErfolgskriterienReview() {
           <CardDescription>5 Kriterien mit quantitativer und qualitativer Abdeckung.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
+          <p className="text-muted-foreground">
+            Strategische Einordnung: Erfolgskriterien dienen als Entscheidungsinstrument zur Priorisierung von Ressourcen und nicht als reines Reporting.
+            Jedes Kriterium ist direkt an eine Go/No-Go-Frage gekoppelt.
+          </p>
           {criteria.map((item) => (
             <div key={item.title} className="rounded-lg border p-3 space-y-1">
               <p className="font-semibold">{item.title}</p>
@@ -39,8 +43,9 @@ export default function B1ErfolgskriterienReview() {
         <CardContent className="space-y-2 text-sm leading-6">
           <p><strong>Wann wird reviewed?</strong> Sprint Tag 4 (Prototyp-Test) und Sprint Tag 5 (Final Review).</p>
           <p><strong>Wer entscheidet?</strong> Produktverantwortung, UX-Lead und Prozessverantwortliche im gemeinsamen Review-Board.</p>
+          <p><strong>Governance-Mechanismus:</strong> Das Review-Board prüft pro Kriterium die Zielerreichung, priorisiert Abweichungen nach Business-Impact und entscheidet verbindlich über Go/No-Go.</p>
           <p><strong>Was passiert bei Nichterreichung?</strong> Das Ziel wird als Blocker markiert; Freigabe erfolgt erst nach Iteration.</p>
-          <p><strong>Welche Iteration folgt?</strong> Vereinfachung des Signaturflusses, klarere Statusführung, präzisere Rechtstexte.</p>
+          <p><strong>Iterationslogik:</strong> Blocker identifizieren → gezielte Iteration im betroffenen Flussschritt → erneute Messung gegen identische Kriterien vor Entscheid.</p>
           <p><strong>Massnahmen bei Zielverfehlung:</strong> Navigation vereinfachen, Signaturprozess verkürzen, Hinweise sichtbarer machen.</p>
         </CardContent>
       </Card>

@@ -16,28 +16,32 @@ export default function A1Zieldefinition() {
           <CardDescription>Sachlich, präzise und auf den Kern der Problemstruktur ausgerichtet.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5 text-base leading-7">
+          <p className="text-sm text-muted-foreground">
+            Strategische Einordnung: Problem Statement und POV dienen als Design-Treiber für Priorisierung, Scope und Messlogik.
+            Dadurch wird sichergestellt, dass jede Lösungskomponente direkt auf einen validierbaren Outcome einzahlt.
+          </p>
           <div>
             <h3 className="font-semibold text-lg">Problem Statement</h3>
             <p>
-              Junge Erwachsene in WGs erleben bei der Eröffnung eines Mietkautionskontos langsame, papierbasierte
-              und sequentielle Prozesse. Dies führt unter Fristdruck zu Stress, Koordinationsproblemen und
-              Abwanderung zu Kautionsversicherungen.
+              Bei jungen Erwachsenen in WGs führt die heutige Eröffnung eines Mietkautionskontos im kritischen Zeitfenster häufig zu
+              Verzögerungen, weil Mehrparteien-Signaturen sequentiell, medienbruchanfällig und in ihrer rechtlichen Wirkung nicht ausreichend transparent sind.
+              Diese Prozessstruktur erhöht Koordinationsaufwand und Abwanderungswahrscheinlichkeit.
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold text-lg">POV (Nutzerperspektive)</h3>
             <p>
-              Jan braucht eine schnelle, simultane und rechtssichere digitale Abwicklung, da die heutige
-              sequentielle Signatur unter Zeitdruck einen erheblichen Stressfaktor darstellt.
+              Jan braucht eine schnelle, simultane und rechtssichere digitale Abwicklung, weil in der Purchase-Phase jede zusätzliche Koordinationsschleife
+              die Fristwahrnehmung verschärft und die Bereitschaft zum Anbieterwechsel erhöht.
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold text-lg">Ziel des Projekts</h3>
             <p>
-              Reduktion der Prozessdauer, Eliminierung von Medienbrüchen und messbare Absicherung der
-              wahrgenommenen Rechtssicherheit bei der WG-Kautionseröffnung.
+              Reduktion der Prozessdauer, Eliminierung von Medienbrüchen und messbare Absicherung der wahrgenommenen Rechtssicherheit,
+              um Abschlusswahrscheinlichkeit, Task Success im Invite-Schritt und Vertrauen in den Gesamtprozess nachweisbar zu erhöhen.
             </p>
           </div>
         </CardContent>
