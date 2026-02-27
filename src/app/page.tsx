@@ -8,7 +8,15 @@ type HomeProps = {
 };
 
 export default async function Home({ searchParams }: HomeProps) {
-  const resolvedSearchParams = (await searchParams) ?? {};
+  let resolvedSearchParams: Record<string, string | string[] | undefined> = {};
+
+  if (searchParams) {
+    try {
+      resolvedSearchParams = await searchParams;
+    } catch {
+      resolvedSearchParams = {};
+    }
+  }
   const sectionParam = resolvedSearchParams.section;
   const section = Array.isArray(sectionParam) ? sectionParam[0] : sectionParam;
   const activeSection = section || 'a1';
