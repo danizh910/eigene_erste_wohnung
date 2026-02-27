@@ -26,6 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
         </header>
         <DashboardContent section={activeSection} />
       </SidebarInset>
+      <AdminAreaButton />
       <DownloadPdfButton />
     </SidebarProvider>
   );

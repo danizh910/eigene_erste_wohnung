@@ -13,8 +13,27 @@ import {
   SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { sectionItems } from '@/lib/section-config';
-import { useSectionVisibility } from '@/hooks/use-section-visibility';
+
+const menuItems = [
+  { id: 'a1', label: 'A1: Situationsanalyse', icon: Home },
+  { id: 'a1-ist-analyse', label: 'A1.1 Ist-Analyse', icon: Circle, isSubItem: true },
+  { id: 'a1-stakeholder-map', label: 'A1.2 Stakeholder-Map', icon: Circle, isSubItem: true },
+  { id: 'a1-customer-journey', label: 'A1.3 Customer Journey', icon: Circle, isSubItem: true },
+  { id: 'a1-zieldefinition', label: 'A1.4 Zieldefinition', icon: Circle, isSubItem: true },
+  { id: 'b1', label: 'B1: Erfolgskriterien', icon: CheckCircle },
+  { id: 'b1-executive-summary', label: 'B1.1 Executive Summary', icon: Circle, isSubItem: true },
+  { id: 'b1-hmw-smart', label: 'B1.2 HMW & SMART', icon: Circle, isSubItem: true },
+  { id: 'b1-erfolgskriterien-review', label: 'B1.3 Kriterien & Review', icon: Circle, isSubItem: true },
+  { id: 'b1-test-evidenz', label: 'B1.4 Test-Evidenz', icon: Circle, isSubItem: true },
+  { id: 'b1-export', label: 'B1.5 Export', icon: Circle, isSubItem: true },
+  { id: 'c', label: 'C: Ideation & Priorisierung', icon: FlaskConical },
+  { id: 'c1-ideation-dokumentation', label: 'C1 Ideation-Dokumentation', icon: Circle, isSubItem: true },
+  { id: 'c2-teamwork-reflexion', label: 'C2 Teamwork-Reflexion', icon: Circle, isSubItem: true },
+  { id: 'c3-priorisierung-entscheid', label: 'C3 Priorisierung & Entscheid', icon: Circle, isSubItem: true },
+  { id: 'd1', label: 'D1: Prototyping', icon: FileText },
+  { id: 'e1', label: 'E1: Testing & Bewertung', icon: Target },
+  { id: 'h1', label: 'H1: Pitch', icon: Presentation },
+];
 
 type DashboardSidebarProps = {
   activeSection: string;
