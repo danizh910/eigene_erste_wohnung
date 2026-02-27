@@ -15,6 +15,7 @@ import C1IdeationDokumentation from './c1-ideation-dokumentation';
 import C2TeamworkReflexion from './c2-teamwork-reflexion';
 import C3PriorisierungEntscheid from './c3-priorisierung-entscheid';
 import Placeholder from './placeholder';
+import { useSectionVisibility } from '@/hooks/use-section-visibility';
 
 const sections: { [key: string]: React.ComponentType<{ title?: string }> } = {
   a1: Situationsanalyse,
@@ -117,6 +118,9 @@ type DashboardContentProps = {
 export default function DashboardContent({ section }: DashboardContentProps) {
   const Component = sections[section] || sections.a1;
   const note = thinkingNotes[section] || thinkingNotes.a1;
+  const { isLoaded, isSectionVisible, firstVisibleSection } = useSectionVisibility();
+  const resolvedSection = isLoaded && !isSectionVisible(section) ? firstVisibleSection : section;
+  const Component = sections[resolvedSection] || sections.a1;
 
   return (
     <div className="p-4 md:p-8 space-y-6">
