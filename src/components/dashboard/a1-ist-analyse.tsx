@@ -10,10 +10,15 @@ export default function A1IstAnalyse() {
           <CardTitle>Kontext</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-lg leading-8">
+          <p className="text-base text-muted-foreground">
+            Strategische Einordnung: Der Life Moment „erste eigene Wohnung“ ist aus Business-Sicht ein Entscheidungsfenster mit hoher Wechselwahrscheinlichkeit.
+            In unserer Analyse wurde deutlich, dass Prozessgeschwindigkeit, Verständlichkeit und Verbindlichkeit in dieser Phase direkter auf die Abschlussquote wirken als zusätzliche Produktfeatures.
+          </p>
           <div>
             <h3 className="font-semibold mb-2">Warum ist die erste eigene Wohnung ein kritischer Life Moment?</h3>
             <p>
-              Der erste eigene Wohnraum markiert den Übergang in finanzielle Selbstständigkeit.
+              Der erste eigene Wohnraum markiert den Übergang in finanzielle Selbstständigkeit und hat hohe strategische Relevanz,
+              weil in kurzer Zeit mehrere irreversible Entscheidungen mit hoher finanzieller Tragweite getroffen werden.
             </p>
           </div>
           <div>
@@ -53,8 +58,8 @@ export default function A1IstAnalyse() {
             </ul>
           </div>
           <p>
-            <strong>Denkweise dahinter:</strong> WG bedeutet Mehrparteien-Prozess und wiederkehrende Veränderung.
-            Genau deshalb ist der Prozess ideal für digitale Workflows.
+            <strong>Interpretation:</strong> Wir interpretieren WG als Mehrparteien-Prozess mit wiederkehrender Veränderung – daher digital prädestiniert.
+            Diese Entscheidung basiert auf der Kombination aus wiederholten Abstimmungen, rechtlicher Nachweispflicht und hoher Fehleranfälligkeit in manuellen Übergaben.
           </p>
         </CardContent>
       </Card>

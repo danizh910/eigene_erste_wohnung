@@ -113,12 +113,12 @@ export default function A1CustomerJourney() {
             <Route className="size-5 text-primary" /> Warum Customer Journey?
           </CardTitle>
           <CardDescription>
-            Die Hauptprobleme entstehen nicht im Produkt selbst, sondern im Übergang zwischen Touchpoints (Medienbrüche).
+            Die Hauptprobleme entstehen nicht im Produkt selbst, sondern im Prozess zwischen Touchpoints (Medienbrüche, Wartezeiten, unklare Verantwortlichkeiten).
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3 text-sm">
           <p>
-            <strong>Das höchste Abwanderungsrisiko liegt in der Phase „Purchase“.</strong>
+            <strong>Das höchste Abwanderungsrisiko liegt in der Phase „Purchase“ und wird als primärer strategischer Hebel priorisiert.</strong>
           </p>
           <ul className="list-disc list-inside text-muted-foreground space-y-1">
             <li>Micro-Steps</li>
@@ -138,13 +138,13 @@ export default function A1CustomerJourney() {
         </CardHeader>
         <CardContent className="space-y-2 text-base leading-7">
           <p>
-            <strong>Hypothese aus Journey:</strong> Nicht das Produkt ist schlecht, sondern der Prozess ist zu langsam/kompliziert
-            im Moment maximalen Zeitdrucks.
+            <strong>Hypothese aus Journey:</strong> Abwanderung wird durch prozessuale Friktion im Zeitdruckfenster ausgelöst,
+            nicht durch ein unzureichendes Produktversprechen.
           </p>
-          <p>Daher wechseln junge Menschen zu Kautionsversicherungen (wahrgenommen schnell + unkompliziert).</p>
+          <p>Daher wechseln junge Erwachsene zu Kautionsversicherungen, wenn diese im kritischen Moment als schneller und koordinationsärmer wahrgenommen werden.</p>
           <p>
-            <strong>Denkweise dahinter:</strong> Wenn wir Abwanderung verhindern wollen, müssen wir den kritischen Moment gewinnen:
-            Purchase/Onboarding.
+            <strong>Denkweise dahinter:</strong> Wir haben bewusst nur einen kritischen Moment fokussiert, um Wirkung zu maximieren:
+            Purchase/Onboarding als Conversion-Engpass mit dem grössten Einfluss auf Abschluss und Vertrauen.
           </p>
         </CardContent>
       </Card>
