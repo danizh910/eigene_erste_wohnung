@@ -14,7 +14,7 @@ type CDeliverable = {
 
 const deliverables: CDeliverable[] = [
   {
-    id: 'c1-ideation-dokumentation',
+    id: 'c1',
     title: 'C1 – Ideation-Dokumentation (Team)',
     description: 'Ergebnisse der Kreativtechniken mit dokumentierter Ideenbasis und Nachweisen (Fotos/Screenshots).',
     icon: ClipboardList,
@@ -25,7 +25,7 @@ const deliverables: CDeliverable[] = [
     ],
   },
   {
-    id: 'c2-teamwork-reflexion',
+    id: 'c2',
     title: 'C2 – Teamwork-Reflexion (individuell)',
     description: 'Rollenbeitrag, Wirksamkeit der Zusammenarbeit, Lernpunkte und konkrete Verbesserungen.',
     icon: Users,
@@ -36,7 +36,7 @@ const deliverables: CDeliverable[] = [
     ],
   },
   {
-    id: 'c3-priorisierung-entscheid',
+    id: 'c3',
     title: 'C3 – Priorisierung & Entscheidungsdoku (Team)',
     description: 'Bewertungslogik, Priorisierungsmatrix und finaler Lösungsentscheid mit Begründung.',
     icon: ListChecks,

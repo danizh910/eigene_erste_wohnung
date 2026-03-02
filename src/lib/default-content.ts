@@ -49,18 +49,14 @@ export const defaultSiteContent: SiteContent = {
       'Die Unterpunkte C1 bis C3 sind getrennt, damit Methodenkompetenz, Reflexion und Entscheidungslogik klar prüfbar sind.',
     ],
     c1: [
-      'Kapitel C zeigt den vollständigen Denkpfad von Divergenz (Ideenbreite) zu Konvergenz (begründeter Entscheid).',
-      'Die Unterpunkte C1 bis C3 sind getrennt, damit Methodenkompetenz, Reflexion und Entscheidungslogik klar prüfbar sind.',
-    ],
-    'c1-ideation-dokumentation': [
       'In C1 wurde absichtlich breit gedacht und erst später bewertet, um keine frühen Denkbarrieren zu erzeugen.',
       'Die dokumentierten Techniken und Artefakte belegen, dass die Ideation methodisch und nicht zufällig erfolgte.',
     ],
-    'c2-teamwork-reflexion': [
+    c2: [
       'C2 reflektiert Rollenwirkung und Teamdynamik als Teil der methodischen Qualität, nicht als persönliche Randnotiz.',
       'Die Reflexion dient der Verbesserung der nächsten Iteration und macht Lernfähigkeit sichtbar.',
     ],
-    'c3-priorisierung-entscheid': [
+    c3: [
       'C3 begründet den finalen Lösungsentscheid mit Matrixlogik, Stakeholder-Anforderungen und SMART-Validierung.',
       'Der Scope von WG-Kaution Express ist eine Priorisierungsentscheidung gegen Komplexität, nicht gegen Innovation.',
     ],

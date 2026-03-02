@@ -1,0 +1,29 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+publish_mode: simple
+
+collections:
+  - name: "content_notes"
+    label: "Content Notes"
+    folder: "content/notes"
+    create: true
+    format: "json"
+    extension: "json"
+    fields:
+      - { name: "id", label: "ID", widget: "string" }
+      - { name: "title", label: "Titel", widget: "string" }
+      - {
+          name: "lines",
+          label: "Lines",
+          widget: "list",
+          field: { name: "line", label: "Line", widget: "string" },
+        }
+      - {
+          name: "updated_at",
+          label: "Updated At",
+          widget: "datetime",
+          required: false,
+        }
