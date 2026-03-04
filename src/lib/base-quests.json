@@ -1,0 +1,173 @@
+[
+  {
+    "id": "q01",
+    "title": "Wohnzimmer-Mini-Redesign",
+    "category": "creative",
+    "tags": ["interior", "style"],
+    "duration_min": 20,
+    "duration_max": 40,
+    "setting": "indoor",
+    "group_mode": "solo",
+    "adventure_level": 2,
+    "equipment": ["Notizblock", "Kamera"],
+    "instructions": [
+      "Wähle einen Bereich im Wohnzimmer aus.",
+      "Skizziere drei alternative Layout-Ideen.",
+      "Setze eine kleine Veränderung direkt um."
+    ],
+    "description": "Gestalte den Raum mit wenig Aufwand neu."
+  },
+  {
+    "id": "q02",
+    "title": "Küchen-Challenge ohne Einkauf",
+    "category": "food",
+    "tags": ["kochen", "budget"],
+    "duration_min": 30,
+    "duration_max": 60,
+    "setting": "indoor",
+    "group_mode": "both",
+    "adventure_level": 3,
+    "equipment": ["Küchenutensilien"],
+    "instructions": [
+      "Nutze nur Zutaten, die bereits vorhanden sind.",
+      "Kreiere ein Gericht mit mindestens drei Komponenten.",
+      "Bewerte am Ende Geschmack und Aufwand."
+    ]
+  },
+  {
+    "id": "q03",
+    "title": "Sonnenaufgang-Spaziergang",
+    "category": "wellbeing",
+    "tags": ["outdoor", "mindfulness"],
+    "duration_min": 25,
+    "duration_max": 45,
+    "setting": "outdoor",
+    "group_mode": "solo",
+    "adventure_level": 2,
+    "equipment": ["Bequeme Schuhe"],
+    "instructions": [
+      "Stehe rechtzeitig auf und plane eine Route.",
+      "Gehe mindestens 20 Minuten ohne Handy-Nutzung.",
+      "Notiere danach drei Beobachtungen."
+    ]
+  },
+  {
+    "id": "q04",
+    "title": "WG-Game-Night",
+    "category": "social",
+    "tags": ["friends", "games"],
+    "duration_min": 60,
+    "duration_max": 120,
+    "setting": "indoor",
+    "group_mode": "group",
+    "adventure_level": 2,
+    "equipment": ["Kartenspiel oder Brettspiel"],
+    "instructions": [
+      "Lade mindestens zwei Mitspieler:innen ein.",
+      "Macht drei kurze Runden in wechselnden Teams.",
+      "Kürt am Ende eine kreative Kategorie für den Siegerpreis."
+    ]
+  },
+  {
+    "id": "q05",
+    "title": "Foto-Bingo im Viertel",
+    "category": "creative",
+    "tags": ["outdoor", "photo"],
+    "duration_min": 35,
+    "duration_max": 75,
+    "setting": "outdoor",
+    "group_mode": "both",
+    "adventure_level": 3,
+    "equipment": ["Smartphone"],
+    "instructions": [
+      "Erstelle eine Bingo-Liste mit 8 Motiven.",
+      "Finde so viele Motive wie möglich in einem Walk.",
+      "Wähle dein Lieblingsbild und teile es."
+    ]
+  },
+  {
+    "id": "q06",
+    "title": "10-Minuten-Aufräum-Sprint",
+    "category": "home",
+    "tags": ["cleanup", "routine"],
+    "duration_min": 10,
+    "duration_max": 20,
+    "setting": "indoor",
+    "group_mode": "both",
+    "adventure_level": 1,
+    "equipment": ["Timer", "Müllbeutel"],
+    "instructions": [
+      "Stelle einen Timer auf 10 Minuten.",
+      "Räume einen klar abgegrenzten Bereich auf.",
+      "Mache Vorher/Nachher-Fotos als Motivation."
+    ]
+  },
+  {
+    "id": "q07",
+    "title": "Neue Sportart testen",
+    "category": "fitness",
+    "tags": ["movement", "challenge"],
+    "duration_min": 30,
+    "duration_max": 90,
+    "setting": "both",
+    "group_mode": "both",
+    "adventure_level": 4,
+    "equipment": ["Sportsachen"],
+    "instructions": [
+      "Wähle eine Sportart, die du sonst nicht machst.",
+      "Teste sie mindestens 30 Minuten.",
+      "Bewerte Spaß, Schwierigkeit und Wiederholungsfaktor."
+    ]
+  },
+  {
+    "id": "q08",
+    "title": "Podcast-Deep-Dive",
+    "category": "learning",
+    "tags": ["audio", "knowledge"],
+    "duration_min": 20,
+    "duration_max": 50,
+    "setting": "both",
+    "group_mode": "solo",
+    "adventure_level": 1,
+    "equipment": ["Kopfhörer"],
+    "instructions": [
+      "Wähle eine Episode zu einem neuen Thema.",
+      "Notiere drei Aha-Momente.",
+      "Formuliere eine Frage, die offen bleibt."
+    ]
+  },
+  {
+    "id": "q09",
+    "title": "One-Pot Comfort Dinner",
+    "category": "food",
+    "tags": ["kochen", "easy"],
+    "duration_min": 25,
+    "duration_max": 45,
+    "setting": "indoor",
+    "group_mode": "both",
+    "adventure_level": 2,
+    "equipment": ["Topf", "Löffel"],
+    "instructions": [
+      "Koche ein Gericht in nur einem Topf.",
+      "Verwende mindestens ein frisches Gemüse.",
+      "Dokumentiere das Rezept für später."
+    ]
+  },
+  {
+    "id": "q10",
+    "title": "Mikro-Abenteuer mit ÖV",
+    "category": "adventure",
+    "tags": ["outdoor", "explore"],
+    "duration_min": 60,
+    "duration_max": 180,
+    "setting": "outdoor",
+    "group_mode": "both",
+    "adventure_level": 5,
+    "equipment": ["ÖV-Ticket", "Wasserflasche"],
+    "instructions": [
+      "Steige an einer zufälligen Haltestelle aus.",
+      "Entdecke dort mindestens einen unbekannten Ort.",
+      "Kehre mit einer neuen Story zurück."
+    ]
+  }
+]

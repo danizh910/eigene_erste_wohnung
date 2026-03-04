@@ -37,3 +37,17 @@ Dieses Projekt nutzt Decap CMS unter **`/cms`** (nicht `/admin`).
 
 - `local_backend: true` ist aktiviert.
 - Für lokale CMS-Tests kann ein lokales Git-Backend genutzt werden (z. B. via `npx decap-server`).
+
+## Quest Roulette (Frontend-only)
+
+- Neue Oberfläche unter **`/roulette`**.
+- Datenbasis: `src/lib/base-quests.json` + optionale lokale Anpassungen (`quests_custom`, `quests_edits`, `quests_deleted`).
+- Spin-Logik:
+  - Das Rad dreht 3–5 Sekunden.
+  - Gewinner wird aus Rotation und Segmentanzahl berechnet.
+- Persistenz via `localStorage`:
+  - `quest_history`
+  - `settings`
+  - `quests_custom`
+  - `quests_edits`
+  - `quests_deleted`
