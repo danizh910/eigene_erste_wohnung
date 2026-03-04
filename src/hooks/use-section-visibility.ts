@@ -2,11 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import {
-  defaultSection,
-  sectionItems,
-  sectionVisibilityStorageKey,
-} from '@/lib/section-config';
+import { defaultSection, sectionItems } from '@/lib/section-config';
 
 type SectionVisibility = Record<string, boolean>;
 
@@ -21,47 +17,53 @@ export function useSectionVisibility() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const raw = window.localStorage.getItem(sectionVisibilityStorageKey);
+    const loadVisibility = async () => {
+      try {
+        const response = await fetch('/api/content', { cache: 'no-store' });
 
-    if (!raw) {
-      setIsLoaded(true);
-      return;
-    }
+        if (!response.ok) {
+          setVisibility(buildDefaultVisibility());
+          return;
+        }
+
+        const payload = (await response.json()) as { sectionVisibility?: SectionVisibility };
+        const withDefaults = { ...buildDefaultVisibility(), ...(payload.sectionVisibility || {}) };
+        setVisibility(withDefaults);
+      } catch {
+        setVisibility(buildDefaultVisibility());
+      } finally {
+        setIsLoaded(true);
+      }
+    };
+
+    void loadVisibility();
+  }, []);
+
+  const setSectionVisibility = useCallback(async (sectionId: string, isVisible: boolean) => {
+    const next = { ...visibility, [sectionId]: isVisible };
+    setVisibility(next);
 
     try {
-      const parsed = JSON.parse(raw) as SectionVisibility;
-      const withDefaults = { ...buildDefaultVisibility(), ...parsed };
-      setVisibility(withDefaults);
+      await fetch(`/api/content/${sectionId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isVisible }),
+      });
     } catch {
-      setVisibility(buildDefaultVisibility());
-    } finally {
-      setIsLoaded(true);
+      // Optimistic update bleibt bestehen, bis erneut geladen wird.
     }
-  }, []);
-
-  const persistVisibility = useCallback((nextVisibility: SectionVisibility) => {
-    setVisibility(nextVisibility);
-    window.localStorage.setItem(sectionVisibilityStorageKey, JSON.stringify(nextVisibility));
-  }, []);
-
-  const setSectionVisibility = useCallback(
-    (sectionId: string, isVisible: boolean) => {
-      const next = { ...visibility, [sectionId]: isVisible };
-      persistVisibility(next);
-    },
-    [persistVisibility, visibility]
-  );
+  }, [visibility]);
 
   const visibleSectionIds = useMemo(
     () => sectionItems.filter((item) => visibility[item.id] !== false).map((item) => item.id),
-    [visibility]
+    [visibility],
   );
 
   const firstVisibleSection = visibleSectionIds[0] || defaultSection;
 
   const isSectionVisible = useCallback(
     (sectionId: string) => visibility[sectionId] !== false,
-    [visibility]
+    [visibility],
   );
 
   return {
