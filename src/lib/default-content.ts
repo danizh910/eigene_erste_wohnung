@@ -1,5 +1,28 @@
 export type SiteContent = {
   thinkingNotes: Record<string, string[]>;
+  pageContent: Record<string, string[]>;
+  sectionVisibility: Record<string, boolean>;
+};
+
+const defaultSectionVisibility: Record<string, boolean> = {
+  a1: true,
+  'a1-ist-analyse': true,
+  'a1-stakeholder-map': true,
+  'a1-customer-journey': true,
+  'a1-zieldefinition': true,
+  b1: true,
+  'b1-executive-summary': true,
+  'b1-hmw-smart': true,
+  'b1-erfolgskriterien-review': true,
+  'b1-test-evidenz': true,
+  'b1-export': true,
+  c: true,
+  c1: true,
+  c2: true,
+  c3: true,
+  d1: true,
+  e1: true,
+  h1: true,
 };
 
 export const defaultSiteContent: SiteContent = {
@@ -70,4 +93,10 @@ export const defaultSiteContent: SiteContent = {
       'Der Pitch wird nach Abschluss der Iteration entlang der dokumentierten Entscheidungslogik finalisiert.',
     ],
   },
+  pageContent: {
+    a1: [
+      'Hier kannst du den sichtbaren Seiteninhalt pro Abschnitt hinterlegen. Dieser Text wird allen Besuchern angezeigt.',
+    ],
+  },
+  sectionVisibility: defaultSectionVisibility,
 };

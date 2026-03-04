@@ -5,7 +5,7 @@ import { Shield } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-const adminPath = process.env.NEXT_PUBLIC_ADMIN_PATH || '/dokumentation';
+const adminPath = process.env.NEXT_PUBLIC_ADMIN_PATH || '/admin';
 
 export function AdminAreaButton() {
   return (

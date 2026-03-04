@@ -37,4 +37,3 @@ export const sectionItems: SectionItem[] = [
 ];
 
 export const defaultSection = 'a1';
-export const sectionVisibilityStorageKey = 'section-visibility';

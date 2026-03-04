@@ -17,7 +17,15 @@ const ADMIN_CODE = '123456';
 
 type SiteContentResponse = {
   thinkingNotes: Record<string, string[]>;
+  pageContent: Record<string, string[]>;
 };
+
+const linesToText = (lines: string[] = []) => lines.join('\n');
+const textToLines = (input: string) =>
+  input
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
 
 export default function AdminPage() {
   const [code, setCode] = useState('');
@@ -26,26 +34,31 @@ export default function AdminPage() {
   const [selectedSectionId, setSelectedSectionId] = useState('a1');
   const [newSectionId, setNewSectionId] = useState('');
   const [notesText, setNotesText] = useState('');
+  const [pageContentText, setPageContentText] = useState('');
   const [status, setStatus] = useState('');
   const [content, setContent] = useState<Record<string, string[]>>(defaultSiteContent.thinkingNotes);
+  const [pageContent, setPageContent] = useState<Record<string, string[]>>(defaultSiteContent.pageContent);
   const { visibility, setSectionVisibility, visibleSectionIds } = useSectionVisibility();
 
   const visibleCount = useMemo(() => visibleSectionIds.length, [visibleSectionIds]);
 
   const sectionOptions = useMemo(() => {
     const known = sectionItems.map((item) => ({ id: item.id, label: `${item.label} (${item.id})` }));
-    const customIds = Object.keys(content).filter((id) => !sectionItems.some((item) => item.id === id));
+    const customNoteIds = Object.keys(content).filter((id) => !sectionItems.some((item) => item.id === id));
+    const customPageIds = Object.keys(pageContent).filter((id) => !sectionItems.some((item) => item.id === id));
+    const mergedCustomIds = Array.from(new Set([...customNoteIds, ...customPageIds]));
 
-    return [
-      ...known,
-      ...customIds.map((id) => ({ id, label: `Eigene Notiz (${id})` })),
-    ];
-  }, [content]);
+    return [...known, ...mergedCustomIds.map((id) => ({ id, label: `Eigene Section (${id})` }))];
+  }, [content, pageContent]);
 
-  const loadSectionContent = (sectionId: string, allContent: Record<string, string[]>) => {
-    const notes = allContent[sectionId] || [];
+  const loadSectionContent = (
+    sectionId: string,
+    allContent: Record<string, string[]>,
+    allPageContent: Record<string, string[]>,
+  ) => {
     setSelectedSectionId(sectionId);
-    setNotesText(notes.join('\n'));
+    setNotesText(linesToText(allContent[sectionId] || []));
+    setPageContentText(linesToText(allPageContent[sectionId] || []));
   };
 
   const loadContent = async (sectionId = selectedSectionId) => {
@@ -57,8 +70,11 @@ export default function AdminPage() {
 
     const payload = (await response.json()) as SiteContentResponse;
     const nextContent = payload.thinkingNotes || defaultSiteContent.thinkingNotes;
+    const nextPageContent = payload.pageContent || defaultSiteContent.pageContent;
+
     setContent(nextContent);
-    loadSectionContent(sectionId, nextContent);
+    setPageContent(nextPageContent);
+    loadSectionContent(sectionId, nextContent, nextPageContent);
   };
 
   const handleUnlock = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -83,24 +99,22 @@ export default function AdminPage() {
       return;
     }
 
-    setSectionVisibility(sectionId, nextChecked);
+    void setSectionVisibility(sectionId, nextChecked);
   };
 
   const handleSectionSwitch = (sectionId: string) => {
-    loadSectionContent(sectionId, content);
+    loadSectionContent(sectionId, content, pageContent);
     setStatus('');
   };
 
   const handleSave = async (sectionId: string) => {
-    const notes = notesText
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean);
+    const notes = textToLines(notesText);
+    const liveContent = textToLines(pageContentText);
 
     const response = await fetch(`/api/content/${sectionId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ notes }),
+      body: JSON.stringify({ notes, pageContent: liveContent }),
     });
 
     if (!response.ok) {
@@ -109,7 +123,7 @@ export default function AdminPage() {
     }
 
     await loadContent(sectionId);
-    setStatus('Gespeichert. Frontend nutzt jetzt die neuen Inhalte.');
+    setStatus('Gespeichert. Notizen und Live-Inhalt sind aktualisiert.');
   };
 
   const handleDelete = async (sectionId: string) => {
@@ -121,7 +135,7 @@ export default function AdminPage() {
     }
 
     await loadContent('a1');
-    setStatus('Eintrag gelöscht.');
+    setStatus('Section-Inhalt gelöscht.');
   };
 
   const handleCreateSection = async () => {
@@ -132,10 +146,29 @@ export default function AdminPage() {
       return;
     }
 
-    await handleSave(sectionId);
-    setNewSectionId('');
     setSelectedSectionId(sectionId);
+    setNotesText('');
+    setPageContentText('');
+    setNewSectionId('');
+    setStatus(`Neue Section vorbereitet: ${sectionId}. Jetzt Inhalte eingeben und speichern.`);
   };
+
+  const movePreviewLine = (index: number, direction: -1 | 1) => {
+    const currentLines = textToLines(pageContentText);
+    const target = index + direction;
+
+    if (target < 0 || target >= currentLines.length) {
+      return;
+    }
+
+    const next = [...currentLines];
+    const temp = next[index];
+    next[index] = next[target];
+    next[target] = temp;
+    setPageContentText(linesToText(next));
+  };
+
+  const previewLines = textToLines(pageContentText);
 
   if (!isUnlocked) {
     return (
@@ -143,7 +176,7 @@ export default function AdminPage() {
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Admin Bereich</CardTitle>
-            <CardDescription>Bitte gib den Admin-Code ein, um Seiten ein- oder auszublenden.</CardDescription>
+            <CardDescription>Bitte gib den Admin-Code ein, um Seiten und Inhalte zu verwalten.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleUnlock} className="space-y-4">
@@ -172,12 +205,12 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-4xl space-y-6 p-4 md:p-8">
+    <main className="mx-auto w-full max-w-5xl space-y-6 p-4 md:p-8">
       <Card>
         <CardHeader>
           <CardTitle>Seitenverwaltung</CardTitle>
           <CardDescription>
-            Aktiviere oder deaktiviere Unterseiten, die normale Besucher in der Navigation sehen sollen.
+            Diese Sichtbarkeit wird auf dem Server gespeichert. Deaktivierte Seiten sehen alle Besucher nicht.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -206,12 +239,12 @@ export default function AdminPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Inhalte bearbeiten (JSON auf dem Server)</CardTitle>
+          <CardTitle>CMS: Inhalt, Kommentare und Vorschau</CardTitle>
           <CardDescription>
-            Hier kannst du Denkweise-Notizen pro Section erfassen, ändern oder löschen. Änderungen erscheinen im Frontend nach dem Neuladen.
+            Du kannst hier pro Section sowohl interne Kommentare (Denkweise) als auch sichtbaren Seiteninhalt pflegen.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-5">
           <div className="space-y-2">
             <Label htmlFor="section-select">Section wählen</Label>
             <select
@@ -228,20 +261,67 @@ export default function AdminPage() {
             </select>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="notes">Notizen (eine Zeile = ein Bulletpoint)</Label>
-            <Textarea
-              id="notes"
-              value={notesText}
-              onChange={(event) => setNotesText(event.target.value)}
-              rows={8}
-            />
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="notes">Kommentare / Denkweise (eine Zeile = ein Punkt)</Label>
+              <Textarea
+                id="notes"
+                value={notesText}
+                onChange={(event) => setNotesText(event.target.value)}
+                rows={10}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="page-content">Live-Seiteninhalt (eine Zeile = ein Absatz)</Label>
+              <Textarea
+                id="page-content"
+                value={pageContentText}
+                onChange={(event) => setPageContentText(event.target.value)}
+                rows={10}
+              />
+            </div>
+          </div>
+
+          <div className="rounded-md border bg-muted/20 p-4 space-y-3">
+            <p className="text-sm font-medium">Live-Preview (Reihenfolge verschiebbar)</p>
+            {previewLines.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Noch kein sichtbarer Seiteninhalt vorhanden.</p>
+            ) : (
+              <ul className="space-y-2">
+                {previewLines.map((line, index) => (
+                  <li key={`${line}-${index}`} className="rounded-md border bg-background p-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm">{line}</p>
+                      <div className="flex gap-1">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => movePreviewLine(index, -1)}
+                          disabled={index === 0}
+                        >
+                          ↑
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => movePreviewLine(index, 1)}
+                          disabled={index === previewLines.length - 1}
+                        >
+                          ↓
+                        </Button>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2">
             <Button onClick={() => handleSave(selectedSectionId)}>Speichern</Button>
             <Button variant="destructive" onClick={() => handleDelete(selectedSectionId)}>
-              Eintrag löschen
+              Section-Inhalt löschen
             </Button>
           </div>
 
@@ -255,7 +335,7 @@ export default function AdminPage() {
                 placeholder="z. B. d1"
               />
               <Button variant="outline" onClick={handleCreateSection}>
-                Erstellen & speichern
+                Anlegen
               </Button>
             </div>
           </div>

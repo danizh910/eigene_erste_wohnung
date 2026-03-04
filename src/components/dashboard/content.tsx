@@ -45,9 +45,15 @@ type DashboardContentProps = {
   section: string;
 };
 
+type SiteContentResponse = {
+  thinkingNotes?: Record<string, string[]>;
+  pageContent?: Record<string, string[]>;
+};
+
 export default function DashboardContent({ section }: DashboardContentProps) {
   const { isLoaded, isSectionVisible, firstVisibleSection } = useSectionVisibility();
   const [thinkingNotes, setThinkingNotes] = useState(defaultSiteContent.thinkingNotes);
+  const [pageContent, setPageContent] = useState(defaultSiteContent.pageContent);
 
   useEffect(() => {
     const loadContent = async () => {
@@ -58,10 +64,14 @@ export default function DashboardContent({ section }: DashboardContentProps) {
           return;
         }
 
-        const content = (await response.json()) as { thinkingNotes?: Record<string, string[]> };
+        const content = (await response.json()) as SiteContentResponse;
 
         if (content?.thinkingNotes && typeof content.thinkingNotes === 'object') {
           setThinkingNotes(content.thinkingNotes);
+        }
+
+        if (content?.pageContent && typeof content.pageContent === 'object') {
+          setPageContent(content.pageContent);
         }
       } catch {
         // Bei Fehlern bleibt der Default-Inhalt aktiv.
@@ -75,8 +85,14 @@ export default function DashboardContent({ section }: DashboardContentProps) {
   const Component = sections[resolvedSection] || sections.a1;
 
   const notes = useMemo(() => {
-    return thinkingNotes[resolvedSection] || defaultSiteContent.thinkingNotes[resolvedSection] || defaultSiteContent.thinkingNotes.a1;
+    return (
+      thinkingNotes[resolvedSection] ||
+      defaultSiteContent.thinkingNotes[resolvedSection] ||
+      defaultSiteContent.thinkingNotes.a1
+    );
   }, [resolvedSection, thinkingNotes]);
+
+  const visiblePageContent = useMemo(() => pageContent[resolvedSection] || [], [pageContent, resolvedSection]);
 
   return (
     <div className="p-4 md:p-8 space-y-6">
@@ -88,6 +104,18 @@ export default function DashboardContent({ section }: DashboardContentProps) {
           ))}
         </ul>
       </section>
+
+      {visiblePageContent.length > 0 ? (
+        <section className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 shadow-sm">
+          <h2 className="text-sm font-semibold text-emerald-900 mb-2">Live-Inhalt aus dem CMS</h2>
+          <div className="space-y-2 text-sm text-emerald-900/90">
+            {visiblePageContent.map((line, index) => (
+              <p key={`${line}-${index}`}>{line}</p>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <Component />
     </div>
   );

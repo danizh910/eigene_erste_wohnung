@@ -5,32 +5,51 @@ import { defaultSiteContent, type SiteContent } from '@/lib/default-content';
 
 const CONTENT_FILE_PATH = path.join(process.cwd(), 'data', 'site-content.json');
 
+const cleanStringArray = (value: unknown): string[] => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.map((line) => (typeof line === 'string' ? line.trim() : '')).filter(Boolean);
+};
+
 const normalizeContent = (input: unknown): SiteContent => {
   if (!input || typeof input !== 'object') {
     return defaultSiteContent;
   }
 
-  const rawThinkingNotes = (input as SiteContent).thinkingNotes;
-
-  if (!rawThinkingNotes || typeof rawThinkingNotes !== 'object') {
-    return defaultSiteContent;
-  }
+  const candidate = input as Partial<SiteContent>;
 
   const thinkingNotes: Record<string, string[]> = { ...defaultSiteContent.thinkingNotes };
-
-  for (const [key, value] of Object.entries(rawThinkingNotes)) {
-    if (Array.isArray(value)) {
-      const cleanedLines = value
-        .map((line) => (typeof line === 'string' ? line.trim() : ''))
-        .filter(Boolean);
-
+  if (candidate.thinkingNotes && typeof candidate.thinkingNotes === 'object') {
+    for (const [key, value] of Object.entries(candidate.thinkingNotes)) {
+      const cleanedLines = cleanStringArray(value);
       if (cleanedLines.length > 0) {
         thinkingNotes[key] = cleanedLines;
       }
     }
   }
 
-  return { thinkingNotes };
+  const pageContent: Record<string, string[]> = { ...defaultSiteContent.pageContent };
+  if (candidate.pageContent && typeof candidate.pageContent === 'object') {
+    for (const [key, value] of Object.entries(candidate.pageContent)) {
+      const cleanedLines = cleanStringArray(value);
+      if (cleanedLines.length > 0) {
+        pageContent[key] = cleanedLines;
+      }
+    }
+  }
+
+  const sectionVisibility: Record<string, boolean> = { ...defaultSiteContent.sectionVisibility };
+  if (candidate.sectionVisibility && typeof candidate.sectionVisibility === 'object') {
+    for (const [key, value] of Object.entries(candidate.sectionVisibility)) {
+      if (typeof value === 'boolean') {
+        sectionVisibility[key] = value;
+      }
+    }
+  }
+
+  return { thinkingNotes, pageContent, sectionVisibility };
 };
 
 export const readSiteContent = async (): Promise<SiteContent> => {
@@ -62,9 +81,34 @@ export const updateSectionNotes = async (sectionId: string, notes: string[]): Pr
   return content;
 };
 
-export const deleteSectionNotes = async (sectionId: string): Promise<SiteContent> => {
+export const updateSectionPageContent = async (sectionId: string, lines: string[]): Promise<SiteContent> => {
+  const content = await readSiteContent();
+  const normalizedLines = lines.map((line) => line.trim()).filter(Boolean);
+
+  if (normalizedLines.length === 0) {
+    delete content.pageContent[sectionId];
+  } else {
+    content.pageContent[sectionId] = normalizedLines;
+  }
+
+  await writeSiteContent(content);
+  return content;
+};
+
+export const updateSectionVisibility = async (
+  sectionId: string,
+  isVisible: boolean,
+): Promise<SiteContent> => {
+  const content = await readSiteContent();
+  content.sectionVisibility[sectionId] = isVisible;
+  await writeSiteContent(content);
+  return content;
+};
+
+export const deleteSectionContent = async (sectionId: string): Promise<SiteContent> => {
   const content = await readSiteContent();
   delete content.thinkingNotes[sectionId];
+  delete content.pageContent[sectionId];
   await writeSiteContent(content);
   return content;
 };
