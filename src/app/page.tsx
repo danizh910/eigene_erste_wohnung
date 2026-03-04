@@ -23,9 +23,6 @@ const content = {
   de: {
     title: 'Erste Wohnung Assistent',
     subtitle: 'Plane deinen Umzug Schritt für Schritt.',
-    startTitle: 'Willkommen',
-    startDescription: 'Der Fortschritt startet korrekt bei 0%. Starte, wenn du bereit bist.',
-    startButton: 'Jetzt starten',
     progress: 'Fortschritt',
     steps: ['Budget planen', 'Dokumente hochladen', 'Daueraufträge', 'Zusammenfassung'],
     next: 'Weiter',
@@ -34,7 +31,6 @@ const content = {
     budgetIncome: 'Monatliches Einkommen',
     budgetRent: 'Miete',
     budgetUtilities: 'Nebenkosten',
-    budgetDone: 'Budgetplanung gespeichert.',
     docsTitle: 'Dokumente hochladen',
     rentalContract: 'Mietvertrag (Pflicht)',
     depositProof: 'Kautionsnachweis (optional)',
@@ -55,9 +51,6 @@ const content = {
   en: {
     title: 'First Apartment Assistant',
     subtitle: 'Plan your move step by step.',
-    startTitle: 'Welcome',
-    startDescription: 'Progress correctly starts at 0%. Start when you are ready.',
-    startButton: 'Start now',
     progress: 'Progress',
     steps: ['Plan budget', 'Upload documents', 'Standing orders', 'Summary'],
     next: 'Next',
@@ -66,7 +59,6 @@ const content = {
     budgetIncome: 'Monthly income',
     budgetRent: 'Rent',
     budgetUtilities: 'Utilities',
-    budgetDone: 'Budget planning saved.',
     docsTitle: 'Upload documents',
     rentalContract: 'Rental agreement (required)',
     depositProof: 'Deposit proof (optional)',
@@ -88,8 +80,8 @@ const content = {
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>('de');
-  const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
+  const [finished, setFinished] = useState(false);
 
   const [budget, setBudget] = useState({ income: '', rent: '', utilities: '' });
   const [rentalFile, setRentalFile] = useState('');
@@ -101,7 +93,7 @@ export default function Home() {
   ]);
 
   const t = content[language];
-  const progressValue = started ? ((step + 1) / t.steps.length) * 100 : 0;
+  const progressValue = finished ? 100 : (step / t.steps.length) * 100;
 
   const standingOrderComplete = Boolean(standingOrder.iban && standingOrder.recipient && standingOrder.date);
 
@@ -136,28 +128,18 @@ export default function Home() {
       <Card>
         <CardHeader>
           <CardTitle>{t.progress}: {Math.round(progressValue)}%</CardTitle>
+          <CardDescription>{finished ? t.finished : t.steps[step]}</CardDescription>
         </CardHeader>
         <CardContent>
           <Progress value={progressValue} />
         </CardContent>
       </Card>
 
-      {!started ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>{t.startTitle}</CardTitle>
-            <CardDescription>{t.startDescription}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button onClick={() => setStarted(true)}>{t.startButton}</Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>{t.steps[step]}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>{t.steps[step]}</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
             {step === 0 && (
               <>
                 <Label>{t.budgetIncome}</Label>
@@ -166,7 +148,6 @@ export default function Home() {
                 <Input value={budget.rent} onChange={(e) => setBudget((prev) => ({ ...prev, rent: e.target.value }))} />
                 <Label>{t.budgetUtilities}</Label>
                 <Input value={budget.utilities} onChange={(e) => setBudget((prev) => ({ ...prev, utilities: e.target.value }))} />
-                <p className="text-sm text-muted-foreground">{t.budgetDone}</p>
               </>
             )}
 
@@ -191,7 +172,7 @@ export default function Home() {
                 <Label>{t.executionDate}</Label>
                 <Input type="date" value={standingOrder.date} onChange={(e) => setStandingOrder((prev) => ({ ...prev, date: e.target.value }))} />
                 <p className="text-sm text-muted-foreground">{t.standingHint}</p>
-                <Button disabled={!standingOrderComplete}>{t.confirm}</Button>
+                {standingOrderComplete ? <Button>{t.confirm}</Button> : null}
               </>
             )}
 
@@ -242,18 +223,20 @@ export default function Home() {
               <Button variant="outline" disabled={step === 0} onClick={() => setStep((s) => s - 1)}>{t.back}</Button>
               {step < t.steps.length - 1 ? (
                 <Button
-                  onClick={() => setStep((s) => s + 1)}
+                  onClick={() => {
+                    setFinished(false);
+                    setStep((s) => s + 1);
+                  }}
                   disabled={(step === 1 && !rentalFile) || (step === 2 && !standingOrderComplete)}
                 >
                   {t.next}
                 </Button>
               ) : (
-                <Button>{t.finished}</Button>
+                <Button onClick={() => setFinished(true)}>{t.finished}</Button>
               )}
             </div>
           </CardContent>
         </Card>
-      )}
     </main>
   );
 }
